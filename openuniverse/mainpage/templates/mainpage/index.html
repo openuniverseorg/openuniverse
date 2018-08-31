@@ -20,6 +20,7 @@
     <link href="{% static 'css/navbar.css' %}" rel="stylesheet" type="text/css">
 
     <link href="https://fonts.googleapis.com/css?family=Rajdhani" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   </head>
 
@@ -52,7 +53,7 @@
                 <!--Search -->
                 <div class="search col-md-9">
                   <div class="input-group">
-                    <input type="text" class="search-field form-control" placeholder="What project would you like to go?">
+                    <input type="text" class="search-field form-control" placeholder="What project would you like to go?" id="search-field">
                     <span class="input-group-btn">
                         <button type="button" class="btn btn-search" aria-label="Left Align">
                           <i class="fas fa-space-shuttle btn-search-icon"></i>
@@ -119,11 +120,37 @@
           </footer>
         </div>
       </div>
+
+      <ul id="projects" style="visibility: hidden; display: none;">
+        {% for project in projects %}
+        <li>{{project}}</li>
+        {% endfor %}
+      </ul>
     </div>
     <!-- JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script>
+      $( function() {
+        var projects = [];
+
+        $("#projects li").each(function() {
+            projects.push($(this).text());
+        });
+
+        $( "#search-field" ).autocomplete({
+        source:  function(request, response) {
+        var results = $.ui.autocomplete.filter(projects, request.term);
+
+        response(results.slice(0, 15));
+        },
+        autoFocus: true,
+        minLength: 1
+        });
+      } );
+    </script>
   </body>
 </html>
