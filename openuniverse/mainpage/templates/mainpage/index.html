@@ -1,0 +1,129 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Index</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="icon" href="{% static 'img/favicon.png' %}">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/navbar.css' %}" rel="stylesheet" type="text/css">
+
+    <link href="https://fonts.googleapis.com/css?family=Rajdhani" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <div class="container">
+            <center>
+              <span class="sidebar-title">Dashboard</span>
+            </center>
+          </div>
+        </div>
+        <div class="sidebar-options">
+          <a href="#">About</a>
+          <a href="#">Metrics</a>
+          <a href="#">Authors</a>
+          <a href="#">Funding</a>'
+        </div>
+      </div>
+
+      <div id="page">
+        <!--Header -->
+          <div class="header">
+            <div class="container">
+              <div class="row">
+                  <div class="col-md-3 header-item">
+                      <span>OPEN UNIVERSE <img class="header-logo" src="{% static 'img/neptune.png' %}" alt="Made by Eucalpy"/></span>
+                    </div>    
+                <!--Search -->
+                <div class="search col-md-9">
+                  <div class="input-group">
+                    <input type="text" class="search-field form-control" placeholder="What project would you like to go?">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-search" aria-label="Left Align">
+                          <i class="fas fa-space-shuttle btn-search-icon"></i>
+                        </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <!--Page Content -->
+          <div class="content">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6">
+                  <span class="section-title">About</span>
+                  <p>Developers are often interested in joining the open source universe based on a set of motivations. Our mission is to provide the connection between open source projects who desire new contributors and interested developers who want to contribute.</p>
+                  <p>The analysis proposed in this website is based on Wiese et. al methodology, who tryed to comprehend how projects receptivity can be defined in open source projects taking into consideration a group of metrics. The analysis proposed here does not necessarly represent the truth, but might be a good start point for newcomers.</p>
+                </div>
+                <div class="col-md-6">
+                  <span class="section-title">Metrics</span>
+                  <p>To understand how our website measures projects receptivity, it is important to know the metrics we evaluate.</p>
+                  <!-- Metric: Forks -->
+                  <div class="metric row">
+                    <div class="col-md-1 text-center">
+                      <div class="metric-logo">
+                          <i class="fas fa-code-branch"></i>
+                      </div>
+                    </div>
+                    <div class="metric-description col-md-11">
+                      <span class="metric-title">NUMBER OF FORKS</span>
+                      <p>Copies of a repository generally have a high correlation with the number of newcomers that the project receive.</p>
+                    </div>
+                  </div>
+                  <!-- Metric: Pull-requests -->
+                  <div class="metric row">
+                      <div class="col-md-1 text-center">
+                        <div class="metric-logo">
+                            <i class="fas fa-file-signature"></i>
+                        </div>
+                      </div>
+                      <div class="metric-description col-md-11">
+                        <span class="metric-title">NUMBER OF MERGED REQUESTS</span>
+                        <p>In most cases, projects that accept external submissions tend to be more receptive.</p>
+                      </div>
+                    </div>
+  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+
+          <footer class="footer">
+            <div class="container">
+            <!--Footer -->
+              <div>Website supported by <a href="http://www5.usp.br/english/?lang=en" target="_blank">USP</a>, <a href="http://www.utfpr.edu.br/estrutura-universitaria/pro-reitorias/prorec/diretoria-de-relacoes-interinstitucionais/international-affairs-eng/about-us" target="_blank">UTFPR</a> and <a href="http://www.fapesp.br/en/" target="_blank">FAPESP</a> <i class="fas fa-graduation-cap" style="color:black;"></i>.</div>
+              <div>Art made by <a href="https://www.flaticon.com/authors/eucalyp" title="Eucalyp" target="_blank">Eucalyp</a> from <a href="https://www.flaticon.com/" title="Flaticon" target="_blank">www.flaticon.com</a> (Licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>).</div>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+    <!-- JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  </body>
+</html>
