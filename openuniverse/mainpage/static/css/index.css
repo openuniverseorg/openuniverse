@@ -3,29 +3,33 @@ body {
   background-color: #F6F9FA;
 }
 
-#page {
-  margin-left: 15vw; /* Navbar */
-}
-
+/**********************
+        HEADER
+***********************/
 .header {
   padding-top: 10px;
 }
 
 .header-logo{
-  width: 30px;;
+  width: 35px;
   height: auto;
+  margin-bottom: 15px;
 }
 
 .header-item {
-  margin-bottom: 5px;
-  font-size: 30px;
-  text-align: center !important;
+  margin-bottom: 15px;
+  margin-right: 10px;
+  font-size: 35px;
   color: black;
   font-family: 'Rajdhani', sans-serif;
-  border-bottom: 2px black solid;
 }
 
-.btn-search:hover {
+.search-btn {
+  background-color: black;
+  border-radius: 0px;
+}
+
+.search-btn:hover {
   /* Start the shake animation and make the animation last for 0.5 seconds */
   animation: shake 0.5s;
   /* When the animation is finished, start again */
@@ -46,16 +50,41 @@ body {
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
-.btn-search {
-  background-color: black;
-  border-radius: 0px;
-}
-
-.btn-search-icon {
+.search-btn-icon {
   color: white;
   font-size: 20px;
 }
 
+.search-options {
+  color: black;
+  background:none;
+  border:none;
+  padding: 3px;
+  font-weight: bold;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+.modal-title {
+  font-size: 30px;
+  background-color: #000;
+  border-radius: 15px;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+.modal-item-title {
+  font-size: 25px;
+  font-family: 'Rajdhani', sans-serif;
+  margin-top: 10px;
+  margin-bottom: 1px;
+}
+
+
+/**********************
+      PAGE CONTENT
+***********************/
 .content {
   font-family: 'Helvetica', 'Arial', sans-serif;
 }
@@ -66,19 +95,26 @@ body {
   font-weight: bold;
 }
 
-.metric {
-  padding: 5px;
-  border-radius: 5px;
-}
-
 .metric-title {
   font-weight: bold;
+  font-size: 20px;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 .metric-logo {
-    font-size: 35px;
+    width: 60px;
+    height: auto;
 }
 
+.reference {
+  font-weight: bold;
+  font-size: 18px;
+  font-family: 'Rajdhani', sans-serif;
+}
+
+/**********************
+        FOOTER
+***********************/
 .footer a {
   text-decoration: none !important;
   font-family: 'Helvetica', 'Arial', sans-serif;

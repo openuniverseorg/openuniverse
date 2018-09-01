@@ -9,15 +9,14 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Index</title>
+    <title>Open Universe</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
-    <link rel="icon" href="{% static 'img/favicon.png' %}">
+    <link rel="icon" href="{% static 'img/neptune.png' %}">
 
     <!-- Custom styles for this template -->
     <link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'css/navbar.css' %}" rel="stylesheet" type="text/css">
 
     <link href="https://fonts.googleapis.com/css?family=Rajdhani" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -26,80 +25,100 @@
 
   <body>
     <div class="wrapper">
-      <div class="sidebar">
-        <div class="sidebar-header">
-          <div class="container">
-            <center>
-              <span class="sidebar-title">Dashboard</span>
-            </center>
-          </div>
-        </div>
-        <div class="sidebar-options">
-          <a href="#">About</a>
-          <a href="#">Metrics</a>
-          <a href="#">Authors</a>
-          <a href="#">Funding</a>'
-        </div>
-      </div>
-
       <div id="page">
         <!--Header -->
           <div class="header">
             <div class="container">
               <div class="row">
-                  <div class="col-md-3 header-item">
-                      <span>OPEN UNIVERSE <img class="header-logo" src="{% static 'img/neptune.png' %}" alt="Made by Eucalpy"/></span>
+                  <div class="col-md-4 text-center">
+                      <span class="header-item">OPEN UNIVERSE</span><img class="header-logo" src="{% static 'img/neptune.png' %}" alt="Made by Eucalpy"/>
                     </div>    
                 <!--Search -->
-                <div class="search col-md-9">
+                <div class="search col-md-8">
                   <div class="input-group">
                     <input type="text" class="search-field form-control" placeholder="What project would you like to go?" id="search-field">
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-search" aria-label="Left Align">
-                          <i class="fas fa-space-shuttle btn-search-icon"></i>
+                        <button type="button" class="btn search-btn" aria-label="Left Align">
+                          <i class="fas fa-space-shuttle search-btn-icon"></i>
                         </button>
                     </span>
                   </div>
+                  <button class="search-options" data-toggle="modal" data-target=".bd-example-modal-lg">I don't have any projects in mind, give me options!</button>
                 </div>
               </div>
             </div>
           </div>
-
           <hr>
 
+          <!-- Modal: Projects Selection -->
+          <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="container">
+                    <span class="modal-title">FIND A PROJECT</span>
+                    <hr>
+                    <div class="modal-item">
+                        <p class="modal-item-title">Language:</p>
+                        {% for language in languages %}
+                        {{language}}
+                        {% endfor %}    
+                    </div>
+                    <div class="modal-item">
+                        <p class="modal-item-title">Domain:</p>
+                        {% for domain in domains %}
+                        {{domain}}
+                        {% endfor %}    
+                    </div>
+                    <div class="modal-item">
+                        <p class="modal-item-title">License:</p>
+                        {% for language in languages %}
+                        {{language}}
+                        {% endfor %}    
+                    </div>
+                    <div class="modal-item">
+                        <p class="modal-item-title">Receptiviy Level:</p>
+                        {% for language in languages %}
+                        {{language}}
+                        {% endfor %}    
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
           <!--Page Content -->
           <div class="content">
-            <div class="container">
+            <div class="container text-justify">
               <div class="row">
                 <div class="col-md-6">
                   <span class="section-title">About</span>
                   <p>Developers are often interested in joining the open source universe based on a set of motivations. Our mission is to provide the connection between open source projects who desire new contributors and interested developers who want to contribute.</p>
-                  <p>The analysis proposed in this website is based on Wiese et. al methodology, who tryed to comprehend how projects receptivity can be defined in open source projects taking into consideration a group of metrics. The analysis proposed here does not necessarly represent the truth, but might be a good start point for newcomers.</p>
+                  <p>The analysis proposed in this website is based on <span class="reference">Wiese et. al methodology</span>, who tryed to comprehend how projects receptivity can be defined in open source projects taking into consideration a group of metrics. The analysis proposed here does not necessarly represent the truth, but might be a good start point for newcomers.</p>
                 </div>
                 <div class="col-md-6">
                   <span class="section-title">Metrics</span>
                   <p>To understand how our website measures projects receptivity, it is important to know the metrics we evaluate.</p>
                   <!-- Metric: Forks -->
                   <div class="metric row">
-                    <div class="col-md-1 text-center">
+                    <div class="col-md-2 text-center">
                       <div class="metric-logo">
-                          <i class="fas fa-code-branch"></i>
+                          <img class="metric-logo " src="{% static 'img/copies.png' %}" alt="Made by Eucalpy"/>
                       </div>
                     </div>
-                    <div class="metric-description col-md-11">
-                      <span class="metric-title">NUMBER OF FORKS</span>
+                    <div class="metric-description col-md-10 row">
+                      <span class="metric-title">FORKS</span>
                       <p>Copies of a repository generally have a high correlation with the number of newcomers that the project receive.</p>
                     </div>
                   </div>
                   <!-- Metric: Pull-requests -->
                   <div class="metric row">
-                      <div class="col-md-1 text-center">
+                      <div class="col-md-2 text-center">
                         <div class="metric-logo">
-                            <i class="fas fa-file-signature"></i>
-                        </div>
+                            <img class="metric-logo " src="{% static 'img/merged.png' %}" alt="Made by Eucalpy"/>
+                          </div>
                       </div>
-                      <div class="metric-description col-md-11">
-                        <span class="metric-title">NUMBER OF MERGED REQUESTS</span>
+                      <div class="metric-description col-md-10 row">
+                        <span class="metric-title">MERGED REQUESTS</span>
                         <p>In most cases, projects that accept external submissions tend to be more receptive.</p>
                       </div>
                     </div>
@@ -133,7 +152,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script>
+
+<script>
       $( function() {
         var projects = [];
 
@@ -147,7 +167,6 @@
 
         response(results.slice(0, 15));
         },
-        autoFocus: true,
         minLength: 1
         });
       } );

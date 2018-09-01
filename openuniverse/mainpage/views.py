@@ -8,5 +8,5 @@ from mainpage.models import Projects
 
 def index(request):
     template = loader.get_template('mainpage/index.html')
-    context = {'projects': Projects.objects.values_list('name')} # Context are the values that I want to send to my HTML
+    context = {'projects': Projects.objects.values_list('name'), 'languages': Projects.objects.values_list('main_language').distinct('main_language'), 'domains': Projects.objects.values_list('domain').distinct('domain')} # Context are the values that I want to send to my HTML
     return HttpResponse(template.render(context, request))
