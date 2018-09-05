@@ -54,7 +54,7 @@ ROOT_URLCONF = 'openuniverse.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['mainpage/templates'],
+        'DIRS': ['website/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -120,5 +120,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "mainpage/static"),
+    os.path.join(BASE_DIR, "website/static"),
 ]

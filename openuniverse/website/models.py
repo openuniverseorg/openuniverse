@@ -21,4 +21,5 @@ class Projects(Document):
     age = StringField()
     has_readme = StringField()
     domain = StringField()
+    license = StringField()
     

@@ -6,7 +6,7 @@ from django.urls import include, path
 
 urlpatterns = [
     # url user is requesting: 'polls/', what django will return: something in polls/urls.py
-    path('mainpage/', include('mainpage.urls')),
+    path('website/', include('website.urls')),
     # url user is requesting: 'admin/', what django will return: admin.site.urls
     path('admin/', admin.site.urls),
 ]

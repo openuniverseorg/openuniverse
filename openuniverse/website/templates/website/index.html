@@ -58,29 +58,51 @@
                     <span class="modal-title">FIND A PROJECT</span>
                     <hr>
                     <div class="modal-item">
-                        <p class="modal-item-title">Language:</p>
-                        {% for language in languages %}
-                        {{language}}
-                        {% endfor %}    
+                        <p class="modal-item-title">Languages:</p>
+                        <form>
+                            {% for language in languages %}
+                              <div class="form-check form-check-inline">
+                                  <label class="form-check-label checkbox-text">
+                                      <input class="form-check-input" type="checkbox">
+                                      {{language}}
+                                    </label>      
+                              </div>
+                            {% endfor %}    
+                        </form>                          
                     </div>
                     <div class="modal-item">
-                        <p class="modal-item-title">Domain:</p>
+                        <p class="modal-item-title">Domains:</p>
+                        <form>
                         {% for domain in domains %}
-                        {{domain}}
+                          <div class="form-check form-check-inline">
+                              <label class="form-check-label checkbox-text">
+                                <input class="form-check-input" type="checkbox">
+                                {{domain}}
+                              </label>
+                          </div>
                         {% endfor %}    
+                      </form>                          
                     </div>
                     <div class="modal-item">
-                        <p class="modal-item-title">License:</p>
-                        {% for language in languages %}
-                        {{language}}
-                        {% endfor %}    
-                    </div>
-                    <div class="modal-item">
-                        <p class="modal-item-title">Receptiviy Level:</p>
-                        {% for language in languages %}
-                        {{language}}
-                        {% endfor %}    
-                    </div>
+                      <p class="modal-item-title">Licenses:</p>
+                      <form>
+                      {% for license in licenses %}
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label checkbox-text">
+                              <input class="form-check-input" type="checkbox">
+                              {{license}}
+                            </label>
+                        </div>
+                      {% endfor %}    
+                    </form>                          
+                  </div>
+
+                    <hr>
+                    <center>
+                      <button type="button" class="btn modal-search-btn">
+                          FIND
+                      </button>
+                    </center>
                   </div>
                 </div>
               </div>
