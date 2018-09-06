@@ -1,0 +1,157 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Open Universe</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="icon" href="{% static 'img/neptune.png' %}">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
+
+    <link href="https://fonts.googleapis.com/css?family=Rajdhani" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+</head>
+
+<body>
+    <!--Header -->
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <span class="header-item">OPEN UNIVERSE</span><img class="header-logo" src="{% static 'img/neptune.png' %}"
+                        alt="Made by Eucalpy" />
+                </div>
+                <!--Search -->
+                <div class="search col-md-8">
+                    <div class="input-group">
+                        <input type="text" class="search-field form-control" placeholder="What project would you like to go?" id="search-field">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn search-btn" aria-label="Left Align">
+                                <i class="fas fa-space-shuttle search-btn-icon"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <button class="search-options" data-toggle="modal" data-target=".bd-example-modal-lg">I don't have any
+                        projects in mind, give me options!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+
+    <!-- Modal: Projects Selection -->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="container">
+                    <span class="modal-title">FIND A PROJECT</span>
+                    <hr>
+                    <form method="POST" action="{% url 'list-projects'%}">
+                        {% csrf_token %}
+                        <div class="modal-item">
+                            <!-- Filter by language -->
+                            <p class="modal-item-title">Languages:</p>
+                            {% for language in languages %}
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label checkbox-text" for="{{language}}">
+                                    <input class="form-check-input" type="checkbox" id="{{language}}" value="{{language}}" name="language">                                    {{language}}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="modal-item">
+                            <!-- Filter by domain -->
+                            <p class="modal-item-title">Domains:</p>
+                            {% for domain in domains %}
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label checkbox-text">
+                                    <input class="form-check-input" type="checkbox" value="{{domain}}" name="domain"> {{domain}}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="modal-item">
+                            <!-- Filter by license -->
+                            <p class="modal-item-title">Licenses:</p>
+                            {% for license in licenses %}
+                            <div class="form-check form-check-inline">
+                                <label class="form-check-label checkbox-text">
+                                    <input class="form-check-input" type="checkbox" value="{{license}}" name="license"> {{license}}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <!-- Submit -->
+                        <hr>
+                        <center>
+                            <button type="submit" value="Submit" class="btn modal-search-btn">
+                                FIND
+                            </button>
+                        </center>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% block body %} {% endblock %}
+
+    <hr>
+    <footer class="footer">
+        <div class="container">
+            <!--Footer -->
+            <div>Website supported by <a href="http://www5.usp.br/english/?lang=en" target="_blank">USP</a>, <a href="http://www.utfpr.edu.br/estrutura-universitaria/pro-reitorias/prorec/diretoria-de-relacoes-interinstitucionais/international-affairs-eng/about-us"
+                    target="_blank">UTFPR</a> and <a href="http://www.fapesp.br/en/" target="_blank">FAPESP</a> <i class="fas fa-graduation-cap"
+                    style="color:black;"></i>.</div>
+            <div>Art made by <a href="https://www.flaticon.com/authors/eucalyp" title="Eucalyp" target="_blank">Eucalyp</a>
+                from <a href="https://www.flaticon.com/" title="Flaticon" target="_blank">www.flaticon.com</a> (Licensed
+                by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC
+                    3.0 BY</a>).</div>
+        </div>
+    </footer>
+
+    <ul id="projects" style="visibility: hidden; display: none;">
+        {% for project in projects %}
+        <li>{{project}}</li>
+        {% endfor %}
+    </ul>
+    <!-- JavaScript
+  ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <script>
+        $(function () {
+            var projects = [];
+
+            $("#projects li").each(function () {
+                projects.push($(this).text());
+            });
+
+            $("#search-field").autocomplete({
+                source: function (request, response) {
+                    var results = $.ui.autocomplete.filter(projects, request.term);
+
+                    response(results.slice(0, 15));
+                },
+                minLength: 1
+            });
+        });
+    </script>
+</body>
+
+</html>
