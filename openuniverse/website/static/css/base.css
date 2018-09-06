@@ -1,0 +1,117 @@
+body {
+    background-color: #F6F9FA;
+  }
+  
+  /**********************
+          HEADER
+  ***********************/
+  .header {
+    padding-top: 1em;
+  }
+  
+  .header-logo{
+    width: 2.5em;
+    height: auto;
+    margin-bottom: 1em;
+  }
+  
+  .header-item {
+    margin-bottom: 1em;
+    margin-right: 0.25em;
+    font-size: 2.5em;
+    color: black;
+    font-family: 'Rajdhani', sans-serif;
+  }
+  
+  .search-btn {
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    border-radius: 0em;
+  }
+  
+  .search-btn:hover {
+    /* Start the shake animation and make the animation last for 0.5 seconds */
+    animation: shake 0.5s;
+    /* When the animation is finished, start again */
+    animation-iteration-count: infinite;
+  }
+  
+  @keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-2px, 0px) rotate(1deg); }
+    30% { transform: translate(2px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-2px, 1px) rotate(0deg); }
+    70% { transform: translate(2px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+  }
+  
+  .search-btn-icon {
+    color: white;
+    font-size: 1.5em;
+  }
+  
+  .search-options {
+    color: black;
+    background:none;
+    border:none;
+    padding: 0.25em;
+    font-weight: bold;
+    font-family: 'Rajdhani', sans-serif;
+  }
+  
+  /**********************
+          MODAL
+  ***********************/
+  
+  .modal-title {
+    font-size: 30px;
+    background-color: #000;
+    border-radius: 15px;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+  }
+  
+  .modal-item-title {
+    font-size: 25px;
+    font-family: 'Rajdhani', sans-serif;
+    margin-top: 10px;
+    margin-bottom: 1px;
+  }
+  
+  .modal-search-btn {
+    margin: 1em;
+    width: 25%;
+    border-radius: 0.5em;
+    font-weight: bold;
+    color: white;
+    background-color: black;
+  }
+  
+  /**********************
+          CHECKBOXES
+  ***********************/
+  
+  .checkbox-text {
+    margin-left: 0.25em;
+    margin-right : 0.25em;
+  }
+
+  /**********************
+        FOOTER
+***********************/
+.footer a {
+    text-decoration: none !important;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    color: black !important;
+    font-weight: bold;
+  }
+  
+  

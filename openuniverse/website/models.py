@@ -3,8 +3,6 @@ from openuniverse.settings import MONGO_DATABASE
 
 connect(MONGO_DATABASE)
 
-# Create your models here.
-
 class Projects(Document):
     name = StringField()
     pull_merged_total = StringField()

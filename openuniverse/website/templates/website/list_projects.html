@@ -1,9 +1,12 @@
 {% extends 'website/base.html' %}
 {% load staticfiles %}
-{% block body %}
+{% block title %} Projects {% endblock %}
 
-    {% for language in selected_languages %}
-        <p>{{language}}</p>
-    {% endfor %}
+{% block body %}
+    <div class="wrapper">
+        <div id="page">
+        {% for project in selected_projects %}
+            <p>{{project.name}}</p>
+        {% endfor %}
 
 {% endblock %}
