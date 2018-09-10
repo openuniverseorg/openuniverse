@@ -5,6 +5,7 @@ connect(MONGO_DATABASE)
 
 class Projects(Document):
     name = StringField()
+    owner = StringField()
     pull_merged_total = StringField()
     star_total = StringField()
     url = StringField()
@@ -20,4 +21,3 @@ class Projects(Document):
     has_readme = StringField()
     domain = StringField()
     license = StringField()
-    

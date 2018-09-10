@@ -1,0 +1,15 @@
+{% extends 'website/base.html' %}
+{% load staticfiles %}
+{% block title %} {{project.name}} {% endblock %}
+
+{% block css  %}
+  <link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
+{% endblock  %}
+
+{% block body %}
+<h1>{{project.name}}</h1>
+<h1>{{project.url}}</h1>
+<h1>{{project.main_language}}</h1>
+<h1>{{project.owner_type}}</h1>
+
+{% endblock %}

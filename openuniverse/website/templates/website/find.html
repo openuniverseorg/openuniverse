@@ -3,10 +3,11 @@
 {% block title %} Projects {% endblock %}
 
 {% block body %}
-    <div class="wrapper">
-        <div id="page">
-        {% for project in selected_projects %}
-            <p>{{project.name}}</p>
-        {% endfor %}
 
+    <div class="container">
+        {% for project in selected_projects %}
+            <a href="{% url 'project' owner=project.owner name=project.name %}"><p>{{project.name}}</p></a>
+        {% endfor %}
+    </div>
+    
 {% endblock %}

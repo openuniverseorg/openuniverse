@@ -1,9 +1,6 @@
 /**********************
       PAGE CONTENT
 ***********************/
-.content {
-  font-family: 'Helvetica', 'Arial', sans-serif;
-}
 
 .section-title {
   font-size: 3em;
@@ -22,8 +19,8 @@
     height: auto;
 }
 
-.reference {
+.author-reference {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 1.15em;
   font-family: 'Rajdhani', sans-serif;
 }

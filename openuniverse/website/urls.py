@@ -7,6 +7,6 @@ from . import views
 urlpatterns = [
     # If the user is requesting nothing more than just polls/, return index view
     path('index/', views.index, name='index'), 
-    path('list-projects/', views.list_projects, name='list-projects')
+    path('find/', views.find, name='find'),
+    path('<str:owner>/<str:name>', views.project, name='project')
     ]
-
