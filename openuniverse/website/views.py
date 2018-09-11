@@ -7,7 +7,7 @@ from django.http import Http404
 # Most of the time the users are going to request the webpage, and we are going to return it.
 
 def index(request):
-    context = {'projects': Projects.objects.values_list('name'), 
+    context = {'projects': Projects.objects, 
                'licenses': Projects.objects.values_list('license').distinct('license'),
                'languages': Projects.objects.values_list('main_language').distinct('main_language'),
                'domains': Projects.objects.values_list('domain').distinct('domain')}
@@ -29,7 +29,7 @@ def find(request):
     if len(selected_licenses) > 0:
         selected_projects = selected_projects(license__in=selected_licenses)
 
-    context =  {'projects': Projects.objects.values_list('name'), 
+    context =  {'projects': Projects.objects, 
                 'licenses': Projects.objects.values_list('license').distinct('license'),
                 'languages': Projects.objects.values_list('main_language').distinct('main_language'),
                 'domains': Projects.objects.values_list('domain').distinct('domain'),
@@ -43,16 +43,25 @@ def find(request):
 def project(request, owner, name):
     try:
         project = Projects.objects.get(name=name,owner=owner)
-        context = {'project': project}    
+        context = {'project': project,
+                   'projects': Projects.objects, 
+                   'licenses': Projects.objects.values_list('license').distinct('license'),
+                   'languages': Projects.objects.values_list('main_language').distinct('main_language'),
+                   'domains': Projects.objects.values_list('domain').distinct('domain')}
+
         return render(request, 'website/project.html', context)
     except Exception as e:
         if e.__class__.__name__ == 'DoesNotExist':
             raise Http404("Project does not exist")
         if e.__class__.__name__ == 'MultipleObjectsReturned':
             project = Projects.objects(name=name,owner=owner)[0]
-            context = {'project': project}    
+            context = {'project': project,
+                       'projects': Projects.objects, 
+                       'licenses': Projects.objects.values_list('license').distinct('license'),
+                       'languages': Projects.objects.values_list('main_language').distinct('main_language'),
+                       'domains': Projects.objects.values_list('domain').distinct('domain')}
+
             return render(request, 'website/project.html', context)
 
 def handler404(request):
     return render(request, 'website/error404.html', status=404)
-    
