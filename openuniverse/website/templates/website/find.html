@@ -1,13 +1,21 @@
 {% extends 'website/base.html' %}
 {% load staticfiles %}
 {% block title %} Projects {% endblock %}
-
+{% block css %}
+<link href="{% static 'css/find.css' %}" rel="stylesheet" type="text/css">
+{% endblock  %}
 {% block body %}
 
     <div class="container">
-        {% for project in selected_projects %}
-            <a href="{% url 'project' owner=project.owner name=project.name %}"><p>{{project.name}}</p></a>
-        {% endfor %}
+        <div class="card-columns">
+            {% for project in selected_projects %}
+                <div class="card border-secondary mb-3">
+                    <div class="card-title"><b>{{project.name}}</b></div>
+                    <h6 class="card-subtitle mb-2 text-muted">{{project.owner}}</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            {% endfor %}
+        </div>
     </div>
     
 {% endblock %}
