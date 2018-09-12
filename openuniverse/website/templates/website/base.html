@@ -29,22 +29,24 @@
                 <div class="col-md-4 text-center">
                     <a href="{% url 'index' %}" style="text-decoration: none;">
                         <span class="header-item">OPEN UNIVERSE</span><img class="header-logo" src="{% static 'img/neptune.png' %}"
-                            alt="Made by Eucalpy" />
+                            alt="Made by Eucalpy"/>
                     </a>
                 </div>
                 <!--Search -->
                 <div class="search col-md-8">
-                    <div class="input-group">
-                        <input type="text" class="search-field form-control" placeholder="What project would you like to go?" id="search-field">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn search-btn" aria-label="Left Align">
-                                <i class="fas fa-space-shuttle search-btn-icon"></i>
-                            </button>
-                        </span>
-                    </div>
+                    <form  id="searchform" action="{% url 'search' %}" method="get" accept-charset="utf-8">
+                        <div class="input-group">
+                                <input type="text" name="name" class="search-field form-control" placeholder="What project would you like to go?" id="search-field">
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn search-btn" aria-label="Left Align" type="submit">
+                                        <i class="fas fa-space-shuttle search-btn-icon"></i>
+                                    </button>
+                                </span>
+                        </div>
+                    </form>
                     <button class="search-options" data-toggle="modal" data-target=".bd-example-modal-lg">I don't have any
-                        projects in mind, give me options!</button>
-                </div>
+                        projects in mind, give me options!</button>    
+                    </div>
             </div>
         </div>
     </div>

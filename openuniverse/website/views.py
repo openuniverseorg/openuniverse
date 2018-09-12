@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.template import loader, RequestContext
 from website.models import Projects
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 
 # Thes views are python functions that take a request from the user request and return something.
 # Most of the time the users are going to request the webpage, and we are going to return it.
@@ -14,6 +14,26 @@ def index(request):
 
     return render(request, 'website/index.html', context)
 
+def search(request):
+    name = request.GET.get('name')
+
+    try:
+        project = Projects.objects.get(name=name)
+        url = reverse('project', kwargs={'name': project.name, 'owner': project.owner})
+        print(url)
+        return HttpResponseRedirect(url)
+    
+    except Exception as e:
+        if e.__class__.__name__ == 'DoesNotExist':
+            raise Http404("Project does not exist")
+        if e.__class__.__name__ == 'MultipleObjectsReturned':
+            project = Projects.objects.get(name=name)[0]
+            url = reverse('website:project', kwargs={'name': project.name, 'owner': project.owner})
+            print(url)
+            return HttpResponseRedirect(url)
+
+    return render(request, 'website/index.html')
+    
 def find(request):
     selected_languages = request.POST.getlist('language')
     selected_domains = request.POST.getlist('domain')
