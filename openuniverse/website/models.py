@@ -1,4 +1,4 @@
-from mongoengine import *
+from mongoengine import connect, Document, StringField
 from openuniverse.settings import MONGO_DATABASE
 
 connect(MONGO_DATABASE)

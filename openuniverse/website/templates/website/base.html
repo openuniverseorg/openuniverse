@@ -27,14 +27,14 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 text-center">
-                    <a href="{% url 'index' %}" style="text-decoration: none;">
+                    <a href="{% url 'website:index' %}" style="text-decoration: none;">
                         <span class="header-item">OPEN UNIVERSE</span><img class="header-logo" src="{% static 'img/neptune.png' %}"
                             alt="Made by Eucalpy"/>
                     </a>
                 </div>
                 <!--Search -->
                 <div class="search col-md-8">
-                    <form  id="searchform" action="{% url 'search' %}" method="get" accept-charset="utf-8">
+                    <form  id="searchform" action="{% url 'website:search' %}" method="get" accept-charset="utf-8">
                         <div class="input-group">
                                 <input type="text" name="name" class="search-field form-control" placeholder="What project would you like to go?" id="search-field">
                                 <span class="input-group-btn">
@@ -59,7 +59,7 @@
                 <div class="container">
                     <span class="modal-title">FIND A PROJECT</span>
                     <hr>
-                    <form method="POST" action="{% url 'find'%}">
+                    <form method="POST" action="{% url 'website:find'%}">
                         {% csrf_token %}
                         <div class="modal-item">
                             <!-- Filter by language -->
