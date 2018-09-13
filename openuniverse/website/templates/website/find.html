@@ -8,12 +8,15 @@
 
     <div class="container">
         <div class="list-group">
-                {% for project in selected_projects %}
-                    <a href="{% url 'website:project' project.owner project.name %}" class="list-group-item">
-                        <h3>{{project.name}}</h3>
-                        <h5>{{project.owner}}</h5>
-                    </a>
-                {% endfor %}
+            <div class="list-header">
+                <span class="list-title">PROJECTS LIST</span>
+            </div>                                
+            {% for project in selected_projects %}
+            <a href="{% url 'website:project' project.owner project.name %}" class="list-group-item">
+                <span class="list-group-item-title">{{project.name}}</span> <br>
+                <span class="list-group-item-subtitle">{{project.owner}}</span>
+            </a>
+            {% endfor %}
         </div>
     </div>
     

@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
         crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Rajdhani" rel="stylesheet">
-</head>
+        <link href="https://fonts.googleapis.com/css?family=Rajdhani:400,700" rel="stylesheet">
+    </head>
 
 <body>
     <!--Header -->
@@ -44,7 +44,7 @@
                                 </span>
                         </div>
                     </form>
-                    <button class="search-options" data-toggle="modal" data-target=".bd-example-modal-lg">I don't have any
+                    <button class="find" data-toggle="modal" data-target=".bd-example-modal-lg">I don't have any
                         projects in mind, give me options!</button>    
                     </div>
             </div>
@@ -57,13 +57,13 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="container">
-                    <span class="modal-title">FIND A PROJECT</span>
+                    <span class="modal-find-title">FIND A PROJECT</span>
                     <hr>
                     <form method="POST" action="{% url 'website:find'%}">
                         {% csrf_token %}
-                        <div class="modal-item">
+                        <div class="modal-find-item">
                             <!-- Filter by language -->
-                            <p class="modal-item-title">Languages:</p>
+                            <p class="modal-find-item-title">Languages:</p>
                             {% for language in languages %}
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label checkbox-text">
@@ -72,9 +72,9 @@
                             </div>
                             {% endfor %}
                         </div>
-                        <div class="modal-item">
+                        <div class="modal-find-item">
                             <!-- Filter by domain -->
-                            <p class="modal-item-title">Domains:</p>
+                            <p class="modal-find-item-title">Domains:</p>
                             {% for domain in domains %}
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label checkbox-text">
@@ -83,9 +83,9 @@
                             </div>
                             {% endfor %}
                         </div>
-                        <div class="modal-item">
+                        <div class="modal-find-item">
                             <!-- Filter by license -->
-                            <p class="modal-item-title">Licenses:</p>
+                            <p class="modal-find-item-title">Licenses:</p>
                             {% for license in licenses %}
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label checkbox-text">
@@ -97,7 +97,7 @@
                         <!-- Submit -->
                         <hr>
                         <center>
-                            <button type="submit" value="Submit" class="btn modal-search-btn">
+                            <button type="submit" value="Submit" class="btn modal-find-btn">
                                 FIND
                             </button>
                         </center>

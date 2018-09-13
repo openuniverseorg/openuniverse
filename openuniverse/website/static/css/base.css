@@ -28,7 +28,7 @@ body {
   font-weight: bold;
   color: white;
   background-color: black;
-  border-radius: 0em;
+  border-radius: 0em !important;
 }
 
 .search-btn:hover {
@@ -57,41 +57,43 @@ body {
   font-size: 1.5em;
 }
 
-.search-options {
-  color: black;
-  background:none;
-  border:none;
-  padding: 0.25em;
-  font-weight: bold;
-  font-family: 'Rajdhani', sans-serif;
-}
-
 /**********************
         MODAL
 ***********************/
+.find {
+  color: black;
+  background:none;
+  border:none;
+  font-size: 1em;
+  font-weight: bold;
+  padding: 0.25em;
+  font-family: 'Rajdhani', sans-serif;
+}
 
-.modal-title {
+.modal-find-title {
   font-size: 30px;
   background-color: #000;
-  border-radius: 15px;
-  padding: 10px;
+  border-radius: 0.2em;
+  padding: 0.4em;
   color: white;
   font-weight: bold;
   font-family: 'Helvetica', 'Arial', sans-serif;
 }
 
-.modal-item-title {
-  font-size: 25px;
+.modal-find-item-title {
+  font-size: 2em;
   font-family: 'Rajdhani', sans-serif;
   margin-top: 10px;
   margin-bottom: 1px;
 }
 
-.modal-search-btn {
+.modal-find-btn {
+  font-size: 1.5em !important;
+  font-weight: bold !important;
   margin: 1em;
-  width: 25%;
+  width: 10em;
+  font-family: 'Rajdhani', sans-serif;
   border-radius: 0.5em;
-  font-weight: bold;
   color: white;
   background-color: black;
 }
@@ -111,7 +113,7 @@ body {
 .footer a {
   text-decoration: none !important;
   font-family: 'Rajdhani', sans-serif;
-    color: black !important;
+  color: black !important;
   font-weight: bold;
 }
 
