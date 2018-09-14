@@ -9,10 +9,34 @@
 {% block body %}
 
 <div class="container">
-    <h1>{{project.name}}</h1>
-    <h1>{{project.url}}</h1>
-    <h1>{{project.main_language}}</h1>
-    <h1>{{project.owner_type}}</h1>   
+	<h2>Data available about this project:</h2>
+    <h3>{{project.name}}</h3>
+    <h3>{{project.url}}</h3>
+    <h3>{{project.main_language}}</h3>
+    <h3>{{project.owner_type}}</h3>
+    <h3>Chats will be mounted in the canvas below:</h3>
+</div>
+<div class="chart-container" style="height:40vh; width:80vw">
+	<canvas id="charts"></canvas>	
 </div>
 
+
+{% load staticfiles %}
+<!--Chart.js base script-->
+<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+<script type="text/javascript">
+    //Grab the canvas element and create a context for the chart:
+	var ctx = document.getElementById("charts").getContext("2d");
+	data = [{{project.commit_total}}]; //importing data from the model instance
+    //Instantiate a new Chart object, especifying
+    //context, type and data 
+	var myChart = new Chart(ctx, {
+    type: "bar",
+    data: data, 
+    options: {
+        responsive:true,
+        maintainAspectRatio: false,
+    }
+  });
+</script>
 {% endblock %}
