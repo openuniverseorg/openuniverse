@@ -79,7 +79,8 @@ DATABASES = {
     }
 }
 
-MONGO_DATABASE = 'openuniverse'
+# porjects is the name of the mongo db used by openuniverse
+MONGO_DATABASE = 'projects'
 mongoengine.connect(MONGO_DATABASE)
 
 # Password validation
