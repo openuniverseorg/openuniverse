@@ -1,23 +1,32 @@
-from mongoengine import connect, Document, StringField
+from mongoengine import connect, Document, StringField, DictField, IntField, BooleanField
 from openuniverse.settings import MONGO_DATABASE
 
 connect(MONGO_DATABASE)
 
 class Projects(Document):
+    # String Fields
     name = StringField()
     owner = StringField()
-    pull_merged_total = StringField()
-    star_total = StringField()
     url = StringField()
-    newcomer_total = StringField()
-    has_contributing = StringField()
-    commit_total = StringField()
     main_language = StringField()
     owner_type = StringField()
-    used_languages_total = StringField()
-    fork_total = StringField()
-    open_issues_total = StringField()
-    age = StringField()
-    has_readme = StringField()
     domain = StringField()
     license = StringField()
+    cluster = StringField()
+    
+    # Boolean Fields
+    has_readme = BooleanField()
+    has_contributing = BooleanField()
+
+    # Integer Fields
+    pull_merged_total = IntField()
+    star_total = IntField()
+    newcomer_total = IntField()
+    commit_total = IntField()
+    used_languages_total = IntField()
+    fork_total = IntField()
+    open_issues_total = IntField()
+    age = IntField()
+
+    # Dictionary Fields
+    time_series = DictField()

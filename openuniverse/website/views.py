@@ -27,9 +27,9 @@ def search(request):
 	return render(request, 'website:index.html')
 	
 def find(request):
-	selected_languages = request.POST.getlist('language')
-	selected_domains = request.POST.getlist('domain')
-	selected_licenses = request.POST.getlist('license')
+	selected_languages = request.GET.getlist('language')
+	selected_domains = request.GET.getlist('domain')
+	selected_licenses = request.GET.getlist('license')
 	selected_projects = Projects.objects
 
 	if len(selected_languages) > 0:

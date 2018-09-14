@@ -36,7 +36,7 @@
                 <div class="search col-md-8">
                     <form  id="searchform" action="{% url 'website:search' %}" method="get" accept-charset="utf-8">
                         <div class="input-group">
-                                <input type="text" name="name" class="search-field form-control" placeholder="What project would you like to go?" id="search-field">
+                                <input type="text" name="name" pattern=".{3,}" class="search-field form-control" placeholder="What project would you like to go?" id="search-field">
                                 <span class="input-group-btn">
                                     <button type="submit" class="btn search-btn" aria-label="Left Align" type="submit">
                                         <i class="fas fa-space-shuttle search-btn-icon"></i>
@@ -59,8 +59,7 @@
                 <div class="container">
                     <span class="modal-find-title">FIND A PROJECT</span>
                     <hr>
-                    <form method="POST" action="{% url 'website:find'%}">
-                        {% csrf_token %}
+                    <form method="GET" action="{% url 'website:find'%}">
                         <div class="modal-find-item">
                             <!-- Filter by language -->
                             <p class="modal-find-item-title">Languages:</p>
