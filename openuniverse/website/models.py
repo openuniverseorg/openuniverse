@@ -1,4 +1,4 @@
-from mongoengine import connect, Document, StringField, DictField, IntField, BooleanField
+from mongoengine import connect, Document, StringField, ListField, IntField, BooleanField
 from openuniverse.settings import MONGO_DATABASE
 
 connect(MONGO_DATABASE)
@@ -29,4 +29,4 @@ class Projects(Document):
     age = IntField()
 
     # Dictionary Fields
-    time_series = DictField()
+    time_series = ListField()
