@@ -42,7 +42,6 @@ def find(request):
 	if len(selected_licenses) > 0:
 		selected_projects = selected_projects(license__in=selected_licenses)
 
-	print(selected_projects)
 	context =  {'projects': Projects.objects, 
 				'licenses': Projects.objects.values_list('license').distinct('license'),
 				'languages': Projects.objects.values_list('main_language').distinct('main_language'),
