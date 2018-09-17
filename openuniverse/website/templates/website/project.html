@@ -1,24 +1,18 @@
+<!-- Importing base.html as template -->
 {% extends 'website/base.html' %}
 {% load staticfiles %}
+<!-- Page Title -->
 {% block title %} {{project.name}} {% endblock %}
-
+<!-- Page Stylesheets -->
 {% block css  %}
-<link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
 {% endblock  %}
 
 {% block body %}
-
-<div class="container">
-    <h2><b>{{project.name|capfirst}}</b></h2>
-    <h3>{{project.url}}</h3>
-    <h3>{{project.main_language}}</h3>
-    <h3>{{project.owner_type}}</h3>
-</div>
-<div class="chart-container" style="height:40vh; width:80vw">
-	<canvas id="charts"></canvas>	
-</div>
-
-
-{% load staticfiles %}
-
+	<div class="container">
+		<h2><b>{{project.name|capfirst}}</b></h2>
+		<h3>{{project.url}}</h3>
+		<h3>{{project.main_language}}</h3>
+		<h3>{{project.owner_type}}</h3>
+	</div>
 {% endblock %}

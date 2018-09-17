@@ -1,11 +1,14 @@
-	{% extends 'website/base.html' %}
-	{% load staticfiles %}
-	{% block title %} Projects {% endblock %}
-	{% block css %}
-	<link href="{% static 'css/find.css' %}" rel="stylesheet" type="text/css">
-	{% endblock  %}
-	{% block body %}
-	
+<!-- Importing base.html as template -->
+{% extends 'website/base.html' %}
+{% load staticfiles %}
+<!-- Page Title -->
+{% block title %} Projects {% endblock %}
+<!-- Page Stylesheets -->
+{% block css %}
+<link href="{% static 'css/find.css' %}" rel="stylesheet" type="text/css">
+{% endblock  %}
+
+{% block body %}
 	<div class="container">
 		<div class="list-group">
 			<div class="list-header">
@@ -15,7 +18,7 @@
 			<a href="{% url 'website:project' project.owner project.name %}" class="list-group-item">
 				<div class="row">
 					<div class="col-md-6">
-						<span class="list-group-item-title">{{project.name|capfirst}}</span> <br>
+						<span class="list-group-item-title">{{project.name|capfirst}}</span><br>
 						<span class="list-group-item-subtitle">Owned by {{project.owner}}</span> <br>
 						<span class="list-group-item-subtitle">License: {{project.license}}</span>           
 					</div>
@@ -27,9 +30,9 @@
 			{% endfor %}
 		</div>
 	</div>
-	{% endblock %}
-	
-	{% block javascript %}
+{% endblock %}
+
+{% block javascript %}
 	<script>
 		labels_size = []
 		for (var i = 1; i <= 52; i++) {
@@ -38,48 +41,46 @@
 		
 		window.onload = function () {
 			{% for project in selected_projects %}
-			var {{project.name|cut:'-'|cut:'.'}}_canvas = document.getElementById('{{project.name|cut:'-'|cut:'.'}}_timeseries').getContext('2d');
-			
-			var {{project.name|cut:'-'|cut:'.'}}_linechart = new Chart({{project.name|cut:'-'|cut:'.'}}_canvas, {
-				type: 'line',
-				scaleOverride : true,
-				scaleSteps : 10,
-				scaleStepWidth : 50,
-				scaleStartValue : 0,
-				data: {
-					labels: labels_size,
-					datasets: [{ 
-						data: {{project.time_series|safe}},
-						label: "{{project.name}}",
-						borderColor: "#000000",
-						fill: false
-					}]
-				},
-				options: {
-					title: {
-						display: true,
-						text: 'Newcomers Entrance'
-					}, 
-					legend: {
-						display: false,
-					},
-					scales: {
-						xAxes: [{
-							ticks: {
-								display: false
-							}
-						}],
-						yAxes: [{
-							ticks: {
-								fontSize: 15,
-								suggestedMax: 100
-							}
+				var {{project.name|cut:'-'|cut:'.'}}_canvas = document.getElementById('{{project.name|cut:'-'|cut:'.'}}_timeseries').getContext('2d');				
+				var {{project.name|cut:'-'|cut:'.'}}_linechart = new Chart({{project.name|cut:'-'|cut:'.'}}_canvas, {
+					type: 'line',
+					scaleOverride : true,
+					scaleSteps : 10,
+					scaleStepWidth : 50,
+					scaleStartValue : 0,
+					data: {
+						labels: labels_size,
+						datasets: [{ 
+							data: {{project.time_series|safe}},
+							label: "{{project.name}}",
+							borderColor: "#000000",
+							fill: false
 						}]
-
+					},
+					options: {
+						title: {
+							display: true,
+							text: 'Newcomers Entrance'
+						}, 
+						legend: {
+							display: false,
+						},
+						scales: {
+							xAxes: [{
+								ticks: {
+									display: false
+								}
+							}],
+							yAxes: [{
+								ticks: {
+									fontSize: 15,
+									suggestedMax: 100
+								}
+							}]
+						}
 					}
-				}
-			});
+				});
 			{% endfor %}
 		}
 	</script>	
-	{% endblock %}
+{% endblock %}
