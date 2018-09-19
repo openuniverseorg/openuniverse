@@ -5,9 +5,9 @@ If you are interested in contributing somehow with our project, you can start by
 
 ## Versioning
 
-## Authors
+## Contributors
 
-* **Felipe Fronchetti** - *Creator of openuniverse* - [@fronchetti](https://github.com/fronchetti)
+* **Felipe Fronchetti** - *Creator and Core Contributor* - [@fronchetti](https://github.com/fronchetti)
 * **Marcelo Freitas** - *Core Contributor* - [@marcelofa](https://github.com/marcelofa)
 
 You can also check the list of contributors who are participating in this project in the insights section [[↗]](https://github.com/openuniverseorg/openuniverse/pulse).
