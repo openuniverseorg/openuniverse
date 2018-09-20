@@ -14,6 +14,6 @@ If you are interested in contributing somehow with our the open universe project
 You can also check the list of contributors who are participating in this project using the insights section [[↗]](https://github.com/openuniverseorg/openuniverse/pulse).
 
 ## License
-Read the LICENSE to understand the rights and limitations of our software (GPL 3.0) [[↗]](https://github.com/openuniverseorg/openuniverse/blob/master/LICENSE.md). 
+Read the LICENSE.md to understand the rights and limitations of our software (GPL 3.0) [[↗]](https://github.com/openuniverseorg/openuniverse/blob/master/LICENSE.md). 
 
 
