@@ -7,9 +7,6 @@ body {
 /**********************
         NAVBAR
 ***********************/
-.navbar-container {
-  border-bottom: 2px #ededed solid;
-}
 
 .navbar-logo{
   width: 2.5em;
@@ -83,10 +80,6 @@ body {
   color: white;
   background-color: black;
 }
-
-input[type=checkbox] { 
-  outline:0;
- }
  
 /**********************
         CHECKBOXES
@@ -109,5 +102,12 @@ input[type=checkbox] {
 
 .footer-container {
   padding-top: 1em;
-  border-top: 2px #ededed solid;
 }
+
+.content {
+  padding-top: 10px;
+  background-color: #f7f7f7;
+  border-top: 2px #ededed solid;
+  border-bottom: 2px  #ededed solid;
+}
+

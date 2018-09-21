@@ -9,44 +9,42 @@
 {% endblock  %}
 
 {% block body %}
-	<div class="content text-justify">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					<span class="section-title">About</span>
-					<p>Developers are often interested in joining the open source universe based on a set of motivations. Our mission
-					is to provide the connection between open source projects who desire new contributors and interested developers
-					who want to contribute.</p>
-					<p>The analysis proposed in this website is based on <span class="author-reference">Wiese et. al methodology</span>,
-					who tryed to comprehend how projects receptivity can be defined in open source projects taking into consideration
-					a group of metrics. The analysis proposed here does not necessarly represent the truth, but might be a good
-					start point for newcomers.</p>
-				</div>
-				<div class="col-md-6">
-					<span class="section-title">Metrics</span>
-					<p>To understand how our website measures projects receptivity, it is important to know the metrics we evaluate.</p>
-					<div class="metric row">
-						<div class="col-md-2 text-center">
-							<div class="metric-logo">
-								<img class="metric-logo" src="{% static 'img/copies.png' %}" alt="Made by Eucalpy" />
-							</div>
-						</div>
-						<div class="metric-description col-md-10 row">
-							<span class="metric-title">FORKS</span>
-							<p>Copies of a repository generally have a high correlation with the number of newcomers that the project
-							receive.</p>
+	<div class="container text-justify">
+		<div class="row">
+			<div class="col-md-6">
+				<span class="section-title">About</span>
+				<p>Developers are often interested in joining the open source universe based on a set of motivations. Our mission
+				is to provide the connection between open source projects who desire new contributors and interested developers
+				who want to contribute.</p>
+				<p>The analysis proposed in this website is based on <span class="author-reference">Wiese et. al methodology</span>,
+				who tryed to comprehend how projects receptivity can be defined in open source projects taking into consideration
+				a group of metrics. The analysis proposed here does not necessarly represent the truth, but might be a good
+				start point for newcomers.</p>
+			</div>
+			<div class="col-md-6">
+				<span class="section-title">Metrics</span>
+				<p>To understand how our website measures projects receptivity, it is important to know the metrics we evaluate.</p>
+				<div class="metric row">
+					<div class="col-md-2 text-center">
+						<div class="metric-logo">
+							<img class="metric-logo" src="{% static 'img/copies.png' %}" alt="Made by Eucalpy" />
 						</div>
 					</div>
-					<div class="metric row">
-						<div class="col-md-2 text-center">
-							<div class="metric-logo">
-								<img class="metric-logo" src="{% static 'img/merged.png' %}" alt="Made by Eucalpy" />
-							</div>
+					<div class="metric-description col-md-10 row">
+						<span class="metric-title">FORKS</span>
+						<p>Copies of a repository generally have a high correlation with the number of newcomers that the project
+						receive.</p>
+					</div>
+				</div>
+				<div class="metric row">
+					<div class="col-md-2 text-center">
+						<div class="metric-logo">
+							<img class="metric-logo" src="{% static 'img/merged.png' %}" alt="Made by Eucalpy" />
 						</div>
-						<div class="metric-description col-md-10 row">
-							<span class="metric-title">MERGED REQUESTS</span>
-							<p>In most cases, projects that accept external submissions tend to be more receptive.</p>
-						</div>
+					</div>
+					<div class="metric-description col-md-10 row">
+						<span class="metric-title">MERGED REQUESTS</span>
+						<p>In most cases, projects that accept external submissions tend to be more receptive.</p>
 					</div>
 				</div>
 			</div>
