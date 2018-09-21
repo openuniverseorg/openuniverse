@@ -21,36 +21,29 @@
 		<link href="https://fonts.googleapis.com/css?family=Rajdhani:400,700" rel="stylesheet">
 	</head>
 	<body>
-		<!-- HEADER -->
-		<div class="header">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4 text-center">
-						<a href="{% url 'website:index' %}" style="text-decoration: none;">
-							<span class="header-item">OPEN UNIVERSE</span><img class="header-logo" src="{% static 'img/neptune.png' %}"
-							alt="Made by Eucalpy"/>
-						</a>
-					</div>
+		<!-- NAVBAR -->
+		<nav class="navbar navbar-fixed-top">
+			<div class="container navbar-container">
+					<a href="{% url 'website:index' %}" class="navbar-brand">
+						<span class="navbar-title">OPEN UNIVERSE</span>
+						<img class="navbar-logo" src="{% static 'img/neptune.png' %}" alt="Made by Eucalpy"/>
+					</a>
+
+					<!-- FIND A PROJECT -->
+					<a class="navbar-btn" data-toggle="modal" data-target=".bd-example-modal-lg" href="">EXPLORE</a>
+					<a class="navbar-btn" href="https://github.com/openuniverseorg/openuniverse">SUBMIT PROJECT</a>    
+					
 					<!-- SEARCH -->
-					<div class="search col-md-8">
-						<form  id="searchform" action="{% url 'website:search' %}" method="get" accept-charset="utf-8">
-							<div class="input-group">
-								<input type="text" name="name" pattern=".{3,}" class="search-field form-control" placeholder="What project would you like to go?" id="search-field">
-								<span class="input-group-btn">
-									<button type="submit" class="btn search-btn" aria-label="Left Align" type="submit">
-										<i class="fas fa-space-shuttle search-btn-icon"></i>
-									</button>
-								</span>
-							</div>
-						</form>
-						<!-- FIND A PROJECT -->
-						<button class="find" data-toggle="modal" data-target=".bd-example-modal-lg">I don't have any
-							projects in mind, give me options!</button>    
-					</div>
+					<form class="navbar-form navbar-right"  id="searchform" action="{% url 'website:search' %}" method="get" accept-charset="utf-8">
+						<div class="search input-group">
+							<input type="text" name="name" pattern=".{3,}" class="search-field form-control" placeholder="Search" id="search-field">
+							<span class="search-icon fa fa-search"></span>
+						</div>
+					</form>	
+
+					<a class="navbar-btn" href="https://github.com/openuniverseorg/openuniverse/wiki">CONTRIBUTE</a>
 				</div>
-			</div>
-		</div>
-		<hr>
+			</nav>
 			
 		<!-- FIND A PROJECT (MODAL) -->
 		<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -63,35 +56,41 @@
 							<div class="modal-find-item">
 								<!-- Filter projects by language -->
 								<p class="modal-find-item-title">Languages:</p>
-								{% for language in languages %}
-									<div class="form-check form-check-inline">
-										<label class="form-check-label checkbox-text">
-											<input class="form-check-input" type="checkbox" value="{{language}}" name="language"> {{language}}
-										</label>
-									</div>
-								{% endfor %}
+								<div class="row" style="margin-left: 10px; margin-right: 10px;">
+									{% for language in languages %}
+										<div class="form-check form-check-inline">
+											<label class="form-check-label checkbox-text">
+												<input class="form-check-input" type="checkbox" value="{{language}}" name="language"> {{language}}
+											</label>
+										</div>
+									{% endfor %}
+								</div>
 							</div>
 							<div class="modal-find-item">
 								<!-- Filter projects by domain -->
 								<p class="modal-find-item-title">Domains:</p>
-								{% for domain in domains %}
-									<div class="form-check form-check-inline">
-										<label class="form-check-label checkbox-text">
-											<input class="form-check-input" type="checkbox" value="{{domain}}" name="domain"> {{domain}}
-										</label>
-									</div>
-								{% endfor %}
+								<div class="row" style="margin-left: 10px; margin-right: 10px;">
+									{% for domain in domains %}
+										<div class="form-check form-check-inline">
+											<label class="form-check-label checkbox-text">
+												<input class="form-check-input" type="checkbox" value="{{domain}}" name="domain"> {{domain}}
+											</label>
+										</div>
+									{% endfor %}
+								</div>
 							</div>
 							<div class="modal-find-item">
 								<!-- Filter projects by license -->
 								<p class="modal-find-item-title">Licenses:</p>
-								{% for license in licenses %}
-									<div class="form-check form-check-inline">
-										<label class="form-check-label checkbox-text">
-											<input class="form-check-input" type="checkbox" value="{{license}}" name="license"> {{license}}
-										</label>
-									</div>
-								{% endfor %}
+								<div class="row" style="margin-left: 10px; margin-right: 5px;">
+									{% for license in licenses %}
+										<div class="form-check form-check-inline">
+											<label class="form-check-label checkbox-text">
+												<input class="form-check-input" type="checkbox" value="{{license}}" name="license"> {{license}}
+											</label>
+										</div>
+									{% endfor %}
+								</div>
 							</div>
 							<hr>
 							<center>
@@ -107,10 +106,9 @@
 			
 		{% block body %} <!-- Empty space for pages body --> {% endblock %}
 			
-		<hr>
 		<!-- FOOTER -->
 		<footer class="footer">
-			<div class="container">
+			<div class="container footer-container">
 				<div class="row">
 					<div class="col-md-6">
 						<div>Website supported by <a href="http://www5.usp.br/english/?lang=en" target="_blank">USP</a>, <a href="http://www.utfpr.edu.br/estrutura-universitaria/pro-reitorias/prorec/diretoria-de-relacoes-interinstitucionais/international-affairs-eng/about-us"
@@ -122,20 +120,6 @@
 							by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC
 							3.0 BY</a>).
 						</div>
-					</div>
-					<div class="col-md-6">
-						Maintained by:
-						<ul class="list-group list-group-flush" style="list-style: none;">
-							<li>
-								<a href="http://fronchetti.com.br/menu/about.html" target="_blank">Luiz Dias</a>,
-								<a href="https://github.com/marceloFA" target="_blank">Marcelo Freitas</a>,
-							</li>        
-							<li>
-								<a href="http://gustavopinto.org/" target="_blank">Gustavo Pinto</a>,
-								<a href="http://www.igor.pro.br/" target="_blank">Igor Steinmacher</a>,
-								<a href="http://igorwiese.com/" target="_blank">Igor Wiese</a>.
-							</li>
-						</ul>
 					</div>
 				</div>    
 			</div>
