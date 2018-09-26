@@ -1,7 +1,7 @@
 <img src="https://github.com/openuniverseorg/openuniverse/blob/master/openuniverse/website/static/img/neptune.png" width="100" height="100">
 Developers are often interested in joining the open source universe based on a set of motivations. Our mission is to provide the connection between open source projects who desire new contributors and interested developers who want to contribute.
 
-## Submit a project
+## Submitting Projects
 We are still under development. In a few weeks we will turn available the submission section.
 
 ## Contributing
