@@ -14,20 +14,23 @@
 		<h3>{{project.url}}</h3>
 		<h3>{{project.main_language}}</h3>
 		<h3>{{project.owner_type}}</h3>
+		<h3>Has README.md? {{project.features.has_readme}}</h3>
+		<h3>Total of pull-requests merged: {{project.statistics.pulls_merged_total}}</h3>
 		<div id="{{project.project_id}}_newcomers_ts"></div>
+		<div id="{{project.project_id}}_forks_ts"></div>
+		<div id="{{project.project_id}}_pulls_merged_ts"></div>
 	</div>
 {% endblock %}
 
 <!-- Google Charts script -->
 {% block javascript %}
 	<script>
-	// Load the Visualization API and the corechart package.
 	google.charts.load('current', {'packages':['line']});
-
-	// Set a callback to run when the Google Visualization API is loaded:
-	google.charts.setOnLoadCallback(drawChart);
+	google.charts.setOnLoadCallback(drawNewcomersTS);
+	google.charts.setOnLoadCallback(drawForksTS);
+	google.charts.setOnLoadCallback(drawPullsMergedTS);
 		
-	function drawChart(){
+	function drawNewcomersTS(){
 		var data = new google.visualization.DataTable();
 		data.addColumn('datetime', 'Date');
 		data.addColumn('number', '# Newcomers');
@@ -37,15 +40,46 @@
 		rows.push([new Date("{{ key }}"), {{ value }}]);
 		{% endfor %}
 		rows.sort(function(a,b){return a[0].getTime() - b[0].getTime()})
-		console.log(rows);
 		data.addRows(rows);
 		
-		// Set chart options
-		var options = { title:'Newcomers (Monthly)', curveType: 'function'};
-		// Instantiate and draw our chart, passing in some options.
-		var {{project.project_id}}_newcomers_ts = new google.charts.Line(document.getElementById('{{project.project_id}}_newcomers_ts'));
-		
+		var options = { title:'Newcomers (Daily)', curveType: 'function'};
+		var {{project.project_id}}_newcomers_ts = new google.charts.Line(document.getElementById('{{project.project_id}}_newcomers_ts'));		
 		{{project.project_id}}_newcomers_ts.draw(data, options);
 	}
+
+	function drawForksTS(){
+		var data = new google.visualization.DataTable();
+		data.addColumn('datetime', 'Date');
+		data.addColumn('number', '# Forks');
+
+		var rows = []
+		{% for key, value in project.time_series.forks_ts.items %}
+		rows.push([new Date("{{ key }}"), {{ value }}]);
+		{% endfor %}
+		rows.sort(function(a,b){return a[0].getTime() - b[0].getTime()})
+		data.addRows(rows);
+		
+		var options = { title:'Forks (Daily)', curveType: 'function'};
+		var {{project.project_id}}_forks_ts = new google.charts.Line(document.getElementById('{{project.project_id}}_forks_ts'));		
+		{{project.project_id}}_forks_ts.draw(data, options);
+	}
+
+	function drawPullsMergedTS(){
+		var data = new google.visualization.DataTable();
+		data.addColumn('datetime', 'Date');
+		data.addColumn('number', '# Pulls Merged');
+
+		var rows = []
+		{% for key, value in project.time_series.pulls_merged_ts.items %}
+		rows.push([new Date("{{ key }}"), {{ value }}]);
+		{% endfor %}
+		rows.sort(function(a,b){return a[0].getTime() - b[0].getTime()})
+		data.addRows(rows);
+		
+		var options = { title:'Pulls Merged (Daily)', curveType: 'function'};
+		var {{project.project_id}}_pulls_merged_ts = new google.charts.Line(document.getElementById('{{project.project_id}}_pulls_merged_ts'));		
+		{{project.project_id}}_pulls_merged_ts.draw(data, options);
+	}
+
 	</script>
 {% endblock %}

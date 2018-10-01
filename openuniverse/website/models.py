@@ -8,6 +8,8 @@ class Projects(Document):
     name = StringField()
     owner = StringField()
     owner_type = StringField()
+    updated_at = StringField()
+    created_at = StringField()
     domain = StringField()
     license = StringField()
     age = IntField()
