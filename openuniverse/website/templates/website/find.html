@@ -15,57 +15,17 @@
 				<span class="list-title">PROJECTS LIST</span>
 			</div>                       
 			{% for project in selected_projects %}
-			<a href="{% url 'website:project' project.owner project.name %}" class="list-group-item">
+			<a href="{% url 'website:project' project.2 project.1 %}" class="list-group-item">
 				<div class="row">
 					<div class="col-md-6">
-						<span class="list-group-item-title">{{project.name|capfirst}}</span><br>
-						<span class="list-group-item-subtitle">Owned by {{project.owner}}</span> <br>
-						<span class="list-group-item-subtitle">License: {{project.license}}</span>           
-					</div>
-					<div class="col-md-6">
-						<canvas id="{{project.name|cut:'-'|cut:'.'}}_timeseries" width="400" height="100"></canvas>
+						<span class="list-group-item-title">{{project.1 | capfirst}}</span><br>
+						<span class="list-group-item-subtitle">Owned by {{project.2}}</span> <br>
+						<span class="list-group-item-subtitle">License: {{project.3}}</span>
 					</div>
 				</div>
 			</a>
 			{% endfor %}
 		</div>
 	</div>
-{% endblock %}
-
-<!-- Google Charts script -->
-{% block javascript %}
-	<script>
-	 	labels_size = [];
-		for (var i = 1; i <= 52; i++) {
-			labels_size.push(i);
-		}
-
-		function drawChart(){
-			{% for project in selected_projects %}
-
-				// Load the Visualization API and the corechart package.
-		        google.charts.load('current', {'packages':['corechart']});
-
-		        // Set a callback to run when the Google Visualization API is loaded:
-		      	google.charts.setOnLoadCallback(drawChart);
-
-		      	// Create the data table:
-		      	var data = new google.visualization.arrayToDataTable(
-		      	[{{project.time_series|safe}}]
-		      		);
-
-		      	// Set chart options
-		        var options = { title:'Newcomers Entrance',
-		    					curveType: 'function'};
-
-		        // Instantiate and draw our chart, passing in some options.
-		        var {{project.name|cut:'-'|cut:'.'}}_canvas = new google.visualization.LineChart(document.getElementById('{{project.name|cut:'-'|cut:'.'}}_timeseries'));
-		        
-		        {{project.name|cut:'-'|cut:'.'}}_canvas.draw(data, options);
-	        {% endfor %}
-	    }
-	    
-    
-    </script>
 {% endblock %}
 

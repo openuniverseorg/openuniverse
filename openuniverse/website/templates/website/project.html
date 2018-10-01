@@ -10,9 +10,43 @@
 
 {% block body %}
 	<div class="container">
-		<h2><b>{{project.name|capfirst}}</b></h2>
+		<h2><b>{{project.name | capfirst}}</b></h2>
 		<h3>{{project.url}}</h3>
 		<h3>{{project.main_language}}</h3>
 		<h3>{{project.owner_type}}</h3>
+		<div id="{{project.project_id}}_newcomers_ts"></div>
 	</div>
+{% endblock %}
+
+<!-- Google Charts script -->
+{% block javascript %}
+	<script>
+	// Load the Visualization API and the corechart package.
+	google.charts.load('current', {'packages':['line']});
+
+	// Set a callback to run when the Google Visualization API is loaded:
+	google.charts.setOnLoadCallback(drawChart);
+		
+	function drawChart(){
+		var data = new google.visualization.DataTable();
+		data.addColumn('datetime', 'Date');
+		data.addColumn('number', '# Newcomers');
+
+		var rows = []
+		{% for key, value in project.time_series.newcomers_ts.items %}
+		rows.push([new Date("{{ key }}"), {{ value }}]);
+		{% endfor %}
+		rows.sort(function(a,b){return a[0].getTime() - b[0].getTime()})
+		console.log(rows);
+		data.addRows(rows);
+		
+		// Set chart options
+		var options = { title:'Newcomers (Monthly)', curveType: 'function'};
+
+		// Instantiate and draw our chart, passing in some options.
+		var {{project.project_id}}_newcomers_ts = new google.charts.Line(document.getElementById('{{project.project_id}}_newcomers_ts'));
+		
+		{{project.project_id}}_newcomers_ts.draw(data, options);
+	}
+	</script>
 {% endblock %}

@@ -1,0 +1,35 @@
+> Projects
+Description: This collection is used to describe the main characteristics of each project in our dataset, 
+including time series distributions of activities designed in the project, and the projects features.
+
+{
+    "_id": ObjectID,
+    "name": string,
+    "owner": string,
+    "owner_type": string,
+    "domain": string,
+    "license": string,
+    "age": integer,
+    "main_language": string,
+    "github_url": string,
+    "statistics": {
+        "pulls_merged_total": integer,
+        "newcomers_total": integer,
+        "open_issues_total": integer,
+        "used_languages_total": integer,
+        "forks_total": integer,
+        "stars_total": integer,
+        "commits_total": integer,
+    },
+    "time_series": {
+        "newcomers_ts": list,
+        "pulls_merged_ts": list,
+        "forks_ts": list,
+    },
+    "features": {
+        "has_readme": boolean,
+        "has_contributing": boolean,
+        "has_issue_tracker": boolean,
+        "has_wiki": boolean
+    }
+}
