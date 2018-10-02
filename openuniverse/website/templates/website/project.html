@@ -10,15 +10,48 @@
 
 {% block body %}
 	<div class="container">
-		<h2><b>{{project.name | capfirst}}</b></h2>
-		<h3>{{project.url}}</h3>
-		<h3>{{project.main_language}}</h3>
-		<h3>{{project.owner_type}}</h3>
-		<h3>Has README.md? {{project.features.has_readme}}</h3>
-		<h3>Total of pull-requests merged: {{project.statistics.pulls_merged_total}}</h3>
+		<div class="row">
+			<div class="col-lg-6">
+			<h1 style="display: inline; text-decoration: none;">{{project.name | capfirst}}  </h1><br>| Mostly written in {{project.main_language}}<br>
+			{% include 'website/_badges.html' %}<br>
+			<a href="{{project.github_url}}" target="_blank">Github offical repository</a>  <span class="fab fa-github"></span>
+			<h5>Data for this project was collected in {{ project.updated_at|time:"D d M Y" }} (formatted datetime stamp to be inserted here)</h5>
+		<!-- Tabela pra monstrar umas estatísticas legais: -->
+			</div>
+			<br>
+			<div class="col-lg-6">
+			<h4>
+				<span><img src="{% static 'resources/icons/png/021-diagnosis.png' %}" height="35px" width="35px" class="img-fluid"></span>
+				Statistics on this project
+			</h4>
+			<table class="table">
+			  <tbody>
+			    <tr>
+			      <th>Newcomers Total</th>
+			      <td>{{project.statistics.newcomers_total}}</td>
+			    </tr>
+			    <tr>
+			      <th scope="row">Total Forks</th>
+			      <td>{{project.statistics.forks_total}}</td>
+			    </tr>
+			    <tr>
+			      <th scope="row">Total pull requests merged</th>
+			      <td>{{project.statistics.pulls_merged_total}}</td>
+			    </tr>
+			    <tr>
+			      <th scope="row">Contributors total</th>
+			      <td>{{project.statistics.contributors_total}}</td>
+			    </tr>    
+			  </tbody>
+			</table>
+		</div>
+		</div>
+		
+		<!-- Charts below: -->
 		<div id="{{project.project_id}}_newcomers_ts"></div>
 		<div id="{{project.project_id}}_forks_ts"></div>
 		<div id="{{project.project_id}}_pulls_merged_ts"></div>
+
 	</div>
 {% endblock %}
 
@@ -42,7 +75,8 @@
 		rows.sort(function(a,b){return a[0].getTime() - b[0].getTime()})
 		data.addRows(rows);
 		
-		var options = { title:'Newcomers (Daily)', curveType: 'function'};
+		var options = { title:'Newcomers (Daily)', curveType: 'function',
+						aggregationTarget: 'auto'};
 		var {{project.project_id}}_newcomers_ts = new google.charts.Line(document.getElementById('{{project.project_id}}_newcomers_ts'));		
 		{{project.project_id}}_newcomers_ts.draw(data, options);
 	}
