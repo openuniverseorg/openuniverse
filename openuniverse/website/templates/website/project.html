@@ -1,24 +1,37 @@
 <!-- Importing base.html as template -->
 {% extends 'website/base.html' %}
 {% load staticfiles %}
+{% load to_datetime %}
 <!-- Page Title -->
 {% block title %} {{project.name}} {% endblock %}
 <!-- Page Stylesheets -->
 {% block css  %}
-	<link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
-{% endblock  %}
+	<style type="text/css">
+		.time_series{
+			margin: 40px;
+		}
 
+		h4{
+			font-weight: normal;
+		}
+	</style>
+{% endblock  %}
 {% block body %}
 	<div class="container">
 		<div class="row">
+			<!-- Project main info -->
 			<div class="col-lg-6">
-			<h1 style="display: inline; text-decoration: none;">{{project.name | capfirst}}  </h1><br>| Mostly written in {{project.main_language}}<br>
-			{% include 'website/_badges.html' %}<br>
-			<a href="{{project.github_url}}" target="_blank">Github offical repository</a>  <span class="fab fa-github"></span>
-			<h5>Data for this project was collected in {{ project.updated_at|time:"D d M Y" }} (formatted datetime stamp to be inserted here)</h5>
-		<!-- Tabela pra monstrar umas estatísticas legais: -->
+				<h1 style="display: inline; text-decoration: none;">
+					{{project.name | capfirst}}  
+				</h1>
+				<br>| Mostly written in {{project.main_language}}<br>
+				{% include 'website/_badges.html' %}<br>
+				<a href="{{project.github_url}}" target="_blank">Github offical repository</a> <span class="fab fa-github"></span><br>
+				Data for this project was collected in 
+				{{project.updated_at|to_datetime}}
 			</div>
 			<br>
+			<!-- Statistics table -->
 			<div class="col-lg-6">
 			<h4>
 				<span><img src="{% static 'resources/icons/png/021-diagnosis.png' %}" height="35px" width="35px" class="img-fluid"></span>
@@ -47,10 +60,13 @@
 		</div>
 		</div>
 		
-		<!-- Charts below: -->
-		<div id="{{project.project_id}}_newcomers_ts"></div>
-		<div id="{{project.project_id}}_forks_ts"></div>
-		<div id="{{project.project_id}}_pulls_merged_ts"></div>
+		<!-- Charts -->
+		<h4>Newcomers entrance</h4>
+		<div class="time_series" id="{{project.project_id}}_newcomers_ts"></div>
+		<h4>Forks</h4>
+		<div class="time_series" id="{{project.project_id}}_forks_ts"></div>
+		<h4>Pulls requests meged</h4>
+		<div class="time_series" id="{{project.project_id}}_pulls_merged_ts"></div>
 
 	</div>
 {% endblock %}
@@ -58,15 +74,16 @@
 <!-- Google Charts script -->
 {% block javascript %}
 	<script>
-	google.charts.load('current', {'packages':['line']});
+	google.charts.load('current', {'packages':['annotationchart']});
 	google.charts.setOnLoadCallback(drawNewcomersTS);
+	google.charts.load('current', {'packages':['line']});
 	google.charts.setOnLoadCallback(drawForksTS);
 	google.charts.setOnLoadCallback(drawPullsMergedTS);
 		
 	function drawNewcomersTS(){
 		var data = new google.visualization.DataTable();
 		data.addColumn('datetime', 'Date');
-		data.addColumn('number', '# Newcomers');
+		data.addColumn('number', 'Newcomers');
 
 		var rows = []
 		{% for key, value in project.time_series.newcomers_ts.items %}
@@ -75,11 +92,20 @@
 		rows.sort(function(a,b){return a[0].getTime() - b[0].getTime()})
 		data.addRows(rows);
 		
-		var options = { title:'Newcomers (Daily)', curveType: 'function',
-						aggregationTarget: 'auto'};
-		var {{project.project_id}}_newcomers_ts = new google.charts.Line(document.getElementById('{{project.project_id}}_newcomers_ts'));		
+		var options = { displayAnnotations: true,
+						title:'Newcomers (Daily)',
+						hAxis: {
+					          title: 'Number of newcomers',
+        				},
+        				vAxis: {
+          					title: 'Date'
+        				},
+						height:400,
+						};
+
+		var {{project.project_id}}_newcomers_ts = new google.visualization.AnnotationChart(document.getElementById('{{project.project_id}}_newcomers_ts'));		
 		{{project.project_id}}_newcomers_ts.draw(data, options);
-	}
+	};
 
 	function drawForksTS(){
 		var data = new google.visualization.DataTable();
@@ -96,7 +122,7 @@
 		var options = { title:'Forks (Daily)', curveType: 'function'};
 		var {{project.project_id}}_forks_ts = new google.charts.Line(document.getElementById('{{project.project_id}}_forks_ts'));		
 		{{project.project_id}}_forks_ts.draw(data, options);
-	}
+	};
 
 	function drawPullsMergedTS(){
 		var data = new google.visualization.DataTable();
@@ -113,7 +139,7 @@
 		var options = { title:'Pulls Merged (Daily)', curveType: 'function'};
 		var {{project.project_id}}_pulls_merged_ts = new google.charts.Line(document.getElementById('{{project.project_id}}_pulls_merged_ts'));		
 		{{project.project_id}}_pulls_merged_ts.draw(data, options);
-	}
+	};
 
 	</script>
 {% endblock %}
