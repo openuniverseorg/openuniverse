@@ -1,4 +1,4 @@
-#!/media/fronchetti/DATA/openuniverse/bin/python
+#!/mnt/SSD-DATA/openuniverse/bin/python
 
 import sys
 import getopt
