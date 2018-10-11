@@ -36,7 +36,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',       
+    'django.contrib.staticfiles',
+    'mathfilters'      
 ]
 
 MIDDLEWARE = [
@@ -64,8 +65,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages'
             ],
             'libraries': {
-                'to_datetime':'openuniverse.templatetags.to_datetime'},
-            
+                'to_datetime':'openuniverse.templatetags.to_datetime',
+                'duration':'openuniverse.templatetags.duration'},
         },
     },
 ]

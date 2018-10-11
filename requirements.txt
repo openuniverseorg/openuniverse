@@ -4,3 +4,4 @@ mongoengine==0.15.3
 pymongo==3.7.1
 pytz==2018.5
 six==1.11.0
+mathfilters==0.4.0

@@ -2,6 +2,8 @@
 {% extends 'website/base.html' %}
 {% load staticfiles %}
 {% load to_datetime %}
+{% load duration %}
+{% load mathfilters %}
 <!-- Page Title -->
 {% block title %} {{project.name}} {% endblock %}
 <!-- Page Stylesheets -->
@@ -28,7 +30,7 @@
 				{% include 'website/_badges.html' %}<br>
 				<a href="{{project.github_url}}" target="_blank">Github offical repository</a> <span class="fab fa-github"></span><br>
 				Data for this project was collected in 
-				{{project.updated_at|to_datetime}}
+				{{project.updated_at| to_datetime}}
 			</div>
 			<br>
 			<!-- Statistics table -->
@@ -40,8 +42,10 @@
 			<table class="table">
 			  <tbody>
 			    <tr>
-			      <th>Newcomers Total</th>
-			      <td>{{project.statistics.newcomers_total}}</td>
+			      <th>Average newcomers per Year</th>
+			      {% with year=project.created_at|duration %}
+			      <td>{{project.statistics.newcomers_total|intdiv:year}}</td>
+			      {% endwith %}
 			    </tr>
 			    <tr>
 			      <th scope="row">Total Forks</th>
