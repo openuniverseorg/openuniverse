@@ -9,7 +9,8 @@ def index(request):
 	context = {'projects': Projects.objects.values_list('name'), 
 			   'licenses': Projects.objects.values_list('license').distinct('license'),
 			   'languages': Projects.objects.values_list('main_language').distinct('main_language'),
-			   'domains': Projects.objects.values_list('domain').distinct('domain')}
+			   'domains': Projects.objects.values_list('domain').distinct('domain'),
+			   'domains_count' : list(Projects.objects.all().values_list('domain'))}
 
 	return render(request, 'website/index.html', context)
 

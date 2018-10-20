@@ -29,15 +29,17 @@
 				<br>| Mostly written in {{project.main_language}}<br>
 				{% include 'website/_badges.html' %}<br>
 				<a href="{{project.github_url}}" target="_blank">Github offical repository</a> <span class="fab fa-github"></span><br>
-				Data for this project was collected in 
-				{{project.updated_at| to_datetime}}
+				Data presented here was collected in 
+				{{project.updated_at| to_datetime}}<br>
+				Domain/Scope: <b>{{project.domain}}</b><br>
+				Under <i>{{project.license}}</i>
 			</div>
 			<br>
 			<!-- Statistics table -->
 			<div class="col-lg-6">
 			<h4>
 				<span><img src="{% static 'resources/icons/png/021-diagnosis.png' %}" height="35px" width="35px" class="img-fluid"></span>
-				Statistics on this project
+				Some statistics
 			</h4>
 			<table class="table">
 			  <tbody>
@@ -65,17 +67,17 @@
 		</div>
 		
 		<!-- Charts -->
-		<h4>Newcomers entrance</h4>
+		<h4>Newcomers Entrance</h4>
 		<div class="time_series" id="{{project.project_id}}_newcomers_ts"></div>
 		<h4>Forks</h4>
 		<div class="time_series" id="{{project.project_id}}_forks_ts"></div>
-		<h4>Pulls requests meged</h4>
+		<h4>Merged Pulls</h4>
 		<div class="time_series" id="{{project.project_id}}_pulls_merged_ts"></div>
 
 	</div>
 {% endblock %}
 
-<!-- Google Charts script -->
+<!-- Google Charts script  -->
 {% block javascript %}
 	<script>
 	google.charts.load('current', {'packages':['annotationchart']});
@@ -88,7 +90,7 @@
 		var data = new google.visualization.DataTable();
 		data.addColumn('datetime', 'Date');
 		data.addColumn('number', 'Newcomers');
-
+ 
 		var rows = []
 		{% for key, value in project.time_series.newcomers_ts.items %}
 		rows.push([new Date("{{ key }}"), {{ value }}]);
@@ -96,8 +98,10 @@
 		rows.sort(function(a,b){return a[0].getTime() - b[0].getTime()})
 		data.addRows(rows);
 		
-		var options = { displayAnnotations: true,
+		var options = { fontName: 'Rajdhani',
+						displayAnnotations: true,
 						title:'Newcomers (Daily)',
+
 						hAxis: {
 					          title: 'Number of newcomers',
         				},
@@ -122,10 +126,22 @@
 		{% endfor %}
 		rows.sort(function(a,b){return a[0].getTime() - b[0].getTime()})
 		data.addRows(rows);
+
+		var result = google.visualization.data.group(
+        data, [{
+            'column': 0,
+            'aggregation': google.visualization.data.month,
+            'type': 'date'
+        }],
+        	  [{
+            'column': 1,
+            'aggregation': google.visualization.data.sum,
+            'type': 'number'
+        }]);
 		
-		var options = { title:'Forks (Daily)', curveType: 'function'};
+		var options = {fontName: 'Rajdhani', title:'Forks (Daily)', curveType: 'function'};
 		var {{project.project_id}}_forks_ts = new google.charts.Line(document.getElementById('{{project.project_id}}_forks_ts'));		
-		{{project.project_id}}_forks_ts.draw(data, options);
+		{{project.project_id}}_forks_ts.draw(result, options);
 	};
 
 	function drawPullsMergedTS(){
@@ -139,10 +155,22 @@
 		{% endfor %}
 		rows.sort(function(a,b){return a[0].getTime() - b[0].getTime()})
 		data.addRows(rows);
+
+		var data_aggregated_by_month = google.visualization.data.group(
+        data, [{
+            'column': 0,
+            'aggregation': google.visualization.data.month,
+            'type': 'date'
+        }],
+        	  [{
+            'column': 1,
+            'aggregation': google.visualization.data.sum,
+            'type': 'number'
+        }]);
 		
-		var options = { title:'Pulls Merged (Daily)', curveType: 'function'};
+		var options = {fontName: 'Rajdhani', title:'Pulls Merged (Daily)', curveType: 'function'};
 		var {{project.project_id}}_pulls_merged_ts = new google.charts.Line(document.getElementById('{{project.project_id}}_pulls_merged_ts'));		
-		{{project.project_id}}_pulls_merged_ts.draw(data, options);
+		{{project.project_id}}_pulls_merged_ts.draw(data_aggregated_by_month, options);
 	};
 
 	</script>

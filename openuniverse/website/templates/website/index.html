@@ -20,6 +20,9 @@
 				who tryed to comprehend how projects receptivity can be defined in open source projects taking into consideration
 				a group of metrics. The analysis proposed here does not necessarly represent the truth, but might be a good
 				start point for newcomers.</p>
+				<p>
+					We encourage you to explore over the {{projects.count}} projects data available for analysis and findings into the open source community.
+				</p>
 			</div>
 			<div class="col-md-6">
 				<span class="section-title">Metrics</span>
@@ -39,5 +42,50 @@
 				</div>
 			</div>
 		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div id="domain-chart"></div>
+			</div>
+		</div>
 	</div>
+
+{% endblock %}
+<!-- Google Charts script  -->
+{% block javascript %}
+<script type="text/javascript">
+	google.charts.load('current', {'packages':['corechart']});
+	google.charts.setOnLoadCallback(domainPieChart);
+
+	var temp = {{domains_count|safe}};
+	//mapping occurences of each unique type of domain:
+	counts = {};
+	for (var i = 0; i < temp.length; i++) {
+    	counts[temp[i]] = 1 + (counts[temp[i]] || 0);
+	}
+
+	var count = Object.keys(counts).map(key => counts[key]);
+	var domains = Object.keys(counts).map(key => key);
+	
+	var rows = [];
+	for (var i=0; i<count.length;i++) {
+		rows.push([ domains[i], count[i] ]);
+	}
+
+	function domainPieChart(){
+		var data = new google.visualization.DataTable();
+		data.addColumn('string','Domain');
+		data.addColumn('number','Ocurrences');
+		data.addRows(rows);
+	
+		var options = {
+			fontName: 'Rajdhani',
+			title: 'Territory of projects',
+			backgroundColor: 'transparent',
+		};
+    	var chart = new google.visualization.PieChart(document.getElementById('domain-chart'));
+    	chart.draw(data, options);
+	}
+    
+</script>
 {% endblock %}
