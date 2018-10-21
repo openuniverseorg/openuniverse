@@ -23,50 +23,53 @@
 				<p>
 					We encourage you to explore over the {{projects.count}} projects data available for analysis and findings into the open source community. Here's how these projects are distributed in matter of their domain:
 				</p>
+				<div id="domain-chart"></div>
 			</div>
+			
 			<div class="col-md-6">
 				<span class="section-title">Metrics</span>
 				<p>To understand how our website measures projects receptivity, it is important to know the metrics we evaluate.</p>
 				<div class="metric row">
-					<div class="metric-description col-md-10">
+					<div class="metric-description col-md-12">
 						<span class="metric-title">FORKS</span>
 						<p>Copies of a repository generally have a high correlation with the number of newcomers that the project
-						receive.</p>
+						receive. Below are some of the most forked projects on Github as an example </p>
 					</div>
 				</div>
 				<div class="metric row">
-					<div class="metric-description col-md-10">
+					<div class="col-md-12">
+						<div id="most-forked-chart"></div>
+					</div>
+				</div>
+				<div class="metric row">
+					<div class="metric-description col-md-12">
 						<span class="metric-title">MERGED REQUESTS</span>
 						<p>In most cases, projects that accept external submissions tend to be more receptive.</p>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<div class="row">
-			<div class="col-md-6">
-				<div id="domain-chart"></div>
-			</div>
-		</div>
 	</div>
 
 {% endblock %}
-<!-- Google Charts script  -->
+
 {% block javascript %}
-<script type="text/javascript">
-	google.charts.load('current', {'packages':['corechart']});
+	<!-- PieChart -->
+	<script type="text/javascript">
+		google.charts.load('current', {'packages':['corechart']});
 	google.charts.setOnLoadCallback(domainPieChart);
 
+	//pytohn list to js array
 	var temp = {{domains_count|safe}};
 	//mapping occurences of each unique type of domain:
 	counts = {};
 	for (var i = 0; i < temp.length; i++) {
-    	counts[temp[i]] = 1 + (counts[temp[i]] || 0);
+		counts[temp[i]] = 1 + (counts[temp[i]] || 0);
 	}
 
 	var count = Object.keys(counts).map(key => counts[key]);
 	var domains = Object.keys(counts).map(key => key);
-	
+
 	var rows = [];
 	for (var i=0; i<count.length;i++) {
 		rows.push([ domains[i], count[i] ]);
@@ -77,7 +80,7 @@
 		data.addColumn('string','Domain');
 		data.addColumn('number','Ocurrences');
 		data.addRows(rows);
-	
+
 		var options = {
 			chartArea: { width: '100%', height: '100%'},
 			fontName: 'Rajdhani',
@@ -85,14 +88,50 @@
 			pieHole: 0.30,
 			backgroundColor: 'transparent',
 			legend: {
-      textStyle: {
-        fontSize: 14
-      }
-    }
+	  			textStyle: {
+	    			fontSize: 14
+	  			}
+			}
 		};
-    	var chart = new google.visualization.PieChart(document.getElementById('domain-chart'));
-    	chart.draw(data, options);
+		var chart = new google.visualization.PieChart(document.getElementById('domain-chart'));
+		chart.draw(data, options);
 	}
-    
-</script>
+
+
+	</script>
+	<!-- BarChart -->
+	<script type="text/javascript">
+		google.charts.load('current', {packages: ['corechart', 'bar']});
+		google.charts.setOnLoadCallback(barChart);
+
+		function barChart() {
+			  var rows = [];
+			  rows.push(['Project Name','Total Forks']);
+			  {% for n_forks in most_forked %}
+			  	rows.push({{n_forks|safe}});
+			  {%endfor%}
+			  var data = google.visualization.arrayToDataTable(rows);
+		      var options = {
+		      	chartArea: { width: '60%', height: '90%'},
+		      	fontName: 'Rajdhani',
+		      	backgroundColor: 'transparent',
+		        title: 'Most Forked Projects',
+		        
+		        hAxis: {
+		          title: 'Number of Forks',
+		        },
+		        vAxis: {
+		          title: 'Project Name'
+		        },
+		        legend: {
+	  				textStyle: {
+	    				fontSize: 14
+	  				}
+				},
+		      };
+
+		      var chart = new google.visualization.BarChart(document.getElementById('most-forked-chart'));
+		      chart.draw(data, options);
+		    }
+	</script>
 {% endblock %}

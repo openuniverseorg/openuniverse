@@ -4,13 +4,29 @@ from django.db.models import F, Func, Value
 from django.template import loader, RequestContext
 from website.models import Projects
 from django.http import Http404
+from operator import itemgetter
+
+#Auxiliar methods:
+def index_bar_chart_helper():
+	#This helper prepares the data for the fork chart
+	#names:
+	names = list(Projects.objects.all().values_list('name'))
+	#total_forks:
+	total_forks = [x['forks_total'] for x in list(Projects.objects.all().values_list('statistics'))]
+	#result:
+	liist = [[name,forks] for name,forks in zip(names,total_forks)]
+	return sorted(liist, key=itemgetter(1))[-5:]
 
 def index(request):
 	context = {'projects': Projects.objects.values_list('name'), 
 			   'licenses': Projects.objects.values_list('license').distinct('license'),
 			   'languages': Projects.objects.values_list('main_language').distinct('main_language'),
 			   'domains': Projects.objects.values_list('domain').distinct('domain'),
-			   'domains_count' : list(Projects.objects.all().values_list('domain'))}
+			   #This is used for the Domain chart
+			   'domains_count' : list(Projects.objects.all().values_list('domain')),
+			   #This is used for the Most Forked chart:
+			   'most_forked' : index_bar_chart_helper(),
+			   }
 
 	return render(request, 'website/index.html', context)
 
