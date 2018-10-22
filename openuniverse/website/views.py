@@ -18,7 +18,7 @@ def index_bar_chart_helper():
 	return sorted(liist, key=itemgetter(1))[-5:]
 
 def index(request):
-	context = {'projects': Projects.objects.values_list('name'), 
+	context = {'projects': list(Projects.objects.values_list('name')), 
 			   'licenses': Projects.objects.values_list('license').distinct('license'),
 			   'languages': Projects.objects.values_list('main_language').distinct('main_language'),
 			   'domains': Projects.objects.values_list('domain').distinct('domain'),

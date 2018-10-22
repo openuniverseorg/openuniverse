@@ -15,6 +15,7 @@
 		<!-- Stylesheets -->
 		<link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css">
 		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+		<link href="{% static 'css/jquery-ui.min.css' %}" rel="stylesheet" type="text/css">
 		<link rel="icon" href="{% static 'img/neptune.png' %}">
 		<!-- Fonts -->
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -36,7 +37,7 @@
 					<!-- SEARCH -->
 					<form class="navbar-form navbar-right"  id="searchform" action="{% url 'website:search' %}" method="get" accept-charset="utf-8">
 						<div class="search input-group">
-							<input type="text" name="name" pattern=".{3,}" class="search-field form-control" placeholder="Search" id="search-field">
+							<input type="text" name="name" class="search-field form-control" placeholder="Search" id="search-field">
 							<span class="search-icon fa fa-search"></span>
 						</div>
 					</form>	
@@ -128,18 +129,19 @@
 				</div>    
 			</div>
 		</footer>
-					
-		<ul id="projects" style="visibility: hidden; display: none;">
-			{% for project in projects %}
-				<li>{{project}}</li>
-			{% endfor %}
-		</ul>
 
 		<!-- Javascript -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="{% static 'js/bootstrap.min.js' %}"></script>
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-			
+		<!-- Used for the autocomplete feature only -->
+		<script src="{%static 'js/jquery-ui.min.js' %}"></script>
+		<script>
+			$(document).ready(function() {
+   				var names = {{projects|safe}};
+    			$( "#search-field" ).autocomplete({source: names, minLength: 2});
+				});
+		</script>
 		{% block javascript %} <!-- Empty space for custom Javascript --> {% endblock %}
 	</body>	
 </html>
