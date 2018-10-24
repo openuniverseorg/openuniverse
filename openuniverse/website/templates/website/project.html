@@ -10,6 +10,16 @@
 {%  block css %}
 	<link rel="stylesheet" type="text/css" href="{% static 'css/project.css' %}">
 	<style>
+		.name{font-weight: bolder;}
+		.info{margin-top: 30px; padding-top: 30px; text-align: center;}
+		.info #statistics {text-align: left;}
+		#description p {display: block;}
+		a {
+			margin-top: 4px;
+			text-decoration: none !important;
+			color: black !important;
+			font-weight: bold;
+		}
 		.charts{margin: 30px; padding: 30px;}
 		.charts div div {height: 100% width:100%;}
 		.container{background-color: white; border-radius: 5px; margin-bottom:10px;}
@@ -19,27 +29,26 @@
 
 {% block body %}
 	<div class="container">
-		<div class="row">
+		<div class="row info">
 			<!-- Project main info -->
-			<div id="main-info" class="col-lg-6">
-				<h1 id="project-name">
+			<div id="description" class="col-lg-6">
+				<h1 id="name">
 					{{project.name | capfirst}}  
 				</h1>
-				<p>| Mostly written in {{project.main_language}}</p>
 				{% include 'website/_badges.html' %}
-				<p><a href="{{project.github_url}}" target="_blank">Github offical repository</a> <span class="fab fa-github"></span></p>
+				<p><a href="{{project.github_url}}" target="_blank">Github repository</a> <span class="fab fa-github"></span></p>
 				<p>Domain/Scope: <i>{{project.domain}}</i></p>
-				<p>Under <i>{{project.license}}</i></p>
-				<p>Data presented here was collected in 
+				<p>Mostly written in {{project.main_language}} | Under <i>{{project.license}}</i></p>
+				<p>Data collected in 
 				{{project.updated_at| to_datetime}}</p>
 			</div>
 			
 			<!-- Statistics table -->
 			<div id="statistics" class="col-lg-6">
-				<h4>
+				<h3>
 					<span><img src="{% static 'resources/icons/png/021-diagnosis.png' %}" height="35px" width="35px" class="img-fluid"></span>
 					Statistics
-				</h4>
+				</h3>
 				<table class="table">
 				  <tbody>
 				    <tr>
