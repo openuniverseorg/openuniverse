@@ -5,9 +5,7 @@ Developers are often interested in joining the open source universe based on a s
 We are still under development. In a few weeks we will turn available the submission section.
 
 ## Contributing
-If you are interested in contributing somehow with our the open universe project, you can start by reading the development instructions in our wiki section [[↗]](https://github.com/openuniverseorg/openuniverse/wiki). If you have any questions, feel free to also chat with us in our Discord [[↗]](https://discordapp.com/invite/wvwRDDj).
-
-## Versioning
+If you are interested in contributing somehow with the open universe project, you can start by reading the development instructions in our wiki section [[↗]](https://github.com/openuniverseorg/openuniverse/wiki). If you have any questions, feel free to message us on Discord [[↗]](https://discordapp.com/invite/wvwRDDj).
 
 ## Contributors
 
