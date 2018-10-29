@@ -10,7 +10,7 @@ install:
   - pip install -r requirements.txt
   
 before_script:
-  mongorestore --db openuniverse ./mongodb/projects.bson
+  mongorestore --db openuniverse mongodb/projects.bson
   
 script:
   python manage.py test
