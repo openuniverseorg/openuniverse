@@ -1,84 +1,63 @@
-# Flake8 Pylint
 from django.shortcuts import render, redirect
-from django.db.models import F, Func, Value
-from django.template import loader, RequestContext
-from website.models import Projects
+from website.models import Project
 from django.http import Http404
-from operator import itemgetter
-
-#Auxiliar methods:
-def index_bar_chart_helper():
-	#This helper prepares the data for the fork chart
-	#names:
-	names = list(Projects.objects.all().values_list('name'))
-	#total_forks:
-	total_forks = [x['forks_total'] for x in list(Projects.objects.all().values_list('statistics'))]
-	#result:
-	liist = [[name,forks] for name,forks in zip(names,total_forks)]
-	return sorted(liist, key=itemgetter(1))[-5:]
 
 def index(request):
-	context = {'projects': list(Projects.objects.values_list('name')), 
-			   'licenses': Projects.objects.values_list('license').distinct('license'),
-			   'languages': Projects.objects.values_list('main_language').distinct('main_language'),
-			   'domains': Projects.objects.values_list('domain').distinct('domain'),
-			   #This is used for the Domain chart
-			   'domains_count' : list(Projects.objects.all().values_list('domain')),
-			   #This is used for the Most Forked chart:
-			   'most_forked' : index_bar_chart_helper(),
-			   }
-
+	context = {'projects': Project.objects.values_list('name', flat=True), 
+			   'licenses': Project.objects.values_list('software_license', flat=True).distinct(),
+			   'languages': Project.objects.values_list('main_language', flat=True).distinct(),
+			   'domains': Project.objects.values_list('application_domain', flat=True).distinct()}
 	return render(request, 'website/index.html', context)
 
 def search(request):
 	name = request.GET.get('name')
 
 	try:
-		project = Projects.objects.get(name=name)
+		project = Project.objects.get(name=name)
 		return redirect('website:project', owner=project.owner, name=project.name)
-	except Projects.DoesNotExist:
+	except Project.DoesNotExist:
 		raise Http404('Project does not exist')
-	except Projects.MultipleObjectsReturned:
-		project = Projects.objects.get(name=name)[0]
+	except Project.MultipleObjectsReturned:
+		project = Project.objects.get(name=name)[0]
 		return redirect('website:project', owner=project.owner, name=project.name)
 
 	return render(request, 'website:index.html')
 	
 def find(request):
-	selected_languages = request.GET.getlist('language')
-	selected_domains = request.GET.getlist('domain')
-	selected_licenses = request.GET.getlist('license')
-	selected_projects = Projects.objects
+	languages = request.GET.getlist('language')
+	domains = request.GET.getlist('domain')
+	licenses = request.GET.getlist('license')
+	selected_projects = Project.objects
 
-	if len(selected_languages) > 0:
-		selected_projects = selected_projects(main_language__in=selected_languages)
+	if len(languages) > 0:
+		selected_projects = selected_projects.filter(main_language__in=languages)
 
-	if len(selected_domains) > 0:
-		selected_projects = selected_projects(domain__in=selected_domains)
+	if len(domains) > 0:
+		selected_projects = selected_projects.filter(application_domain__in=domains)
 	
-	if len(selected_licenses) > 0:
-		selected_projects = selected_projects(license__in=selected_licenses)
+	if len(licenses) > 0:
+		selected_projects = selected_projects.filter(software_license__in=licenses)
 
-	context =  {'projects': Projects.objects.values_list('name'), 
-				'licenses': Projects.objects.values_list('license').distinct('license'),
-				'languages': Projects.objects.values_list('main_language').distinct('main_language'),
-				'domains': Projects.objects.values_list('domain').distinct('domain'),
-				'selected_projects': selected_projects.values_list('project_id', 'name', 'owner', 'license', 'statistics')}
+	context =  {'projects': Project.objects.values_list('name', flat=True), 
+				'licenses': Project.objects.values_list('software_license', flat=True).distinct(),
+				'languages': Project.objects.values_list('main_language', flat=True).distinct(),
+				'domains': Project.objects.values_list('application_domain', flat=True).distinct(),
+				'selected_projects': selected_projects.values_list('id', 'name', 'owner', 'software_license')}
 
 	return render(request, 'website/find.html', context)
 							
 def project(request, owner, name):
 	try:
-		project = Projects.objects.get(name=name,owner=owner)
+		requested_project = Project.objects.get(name=name,owner=owner)
 		context = {'project': project,
-				   'projects': Projects.objects.values_list('name'),
-				   'licenses': Projects.objects.values_list('license').distinct('license'),
-				   'languages': Projects.objects.values_list('main_language').distinct('main_language'),
-				   'domains': Projects.objects.values_list('domain').distinct('domain')}
+				   'projects': Project.objects.values_list('name', flat=True),
+				   'licenses': Project.objects.values_list('software_license', flat=True).distinct(),
+				   'languages': Project.objects.values_list('main_language', flat=True).distinct(),
+				   'domains': Project.objects.values_list('application_domain', flat=True).distinct()}
 		return render(request, 'website/project.html', context)
-	except Projects.DoesNotExist:
+	except Project.DoesNotExist:
 		raise Http404('Project does not exist')
-	except Projects.MultipleObjectsReturned:
+	except Project.MultipleObjectsReturned:
 		raise Http404('Project does not exist')
 
 def handler404(request):

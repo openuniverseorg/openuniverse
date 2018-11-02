@@ -1,7 +1,6 @@
 <!-- Importing base.html as template -->
 {% extends 'website/base.html' %}
 {% load staticfiles %}
-{% load to_datetime %}
 {% load duration %}
 {% load mathfilters %}
 <!-- Page Title -->
@@ -37,10 +36,10 @@
 				</h1>
 				{% include 'website/_badges.html' %}
 				<p><a href="{{project.github_url}}" target="_blank">Github repository</a> <span class="fab fa-github"></span></p>
-				<p>Domain/Scope: <i>{{project.domain}}</i></p>
-				<p>Mostly written in {{project.main_language}} | Under <i>{{project.license}}</i></p>
+				<p>Domain/Scope: <i>{{project.application_domain}}</i></p>
+				<p>Mostly written in {{project.main_language}} | Under <i>{{project.software_license}}</i></p>
 				<p>Data collected in 
-				{{project.updated_at| to_datetime}}</p>
+				{{project.updated_at}}</p>
 			</div>
 			
 			<!-- Statistics table -->

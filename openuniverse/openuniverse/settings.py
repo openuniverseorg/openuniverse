@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-import mongoengine
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,6 +30,7 @@ ALLOWED_HOSTS = ['openuniverse.me','206.189.177.194', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'website.apps.WebsiteConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -75,17 +75,18 @@ WSGI_APPLICATION = 'openuniverse.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
+# https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-14-04
 
 DATABASES = {
     'default': {
-        'ENGINE': '',
-        'NAME': '',
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'openuniversedb',
+        'USER': 'root',
+        'PASSWORD': 'mechamoluiz',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
-
-# porjects is the name of the mongo db used by openuniverse
-MONGO_DATABASE = 'openuniverse'
-mongoengine.connect(MONGO_DATABASE)
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
