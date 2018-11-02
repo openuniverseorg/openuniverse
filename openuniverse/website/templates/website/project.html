@@ -101,7 +101,7 @@
 	<script>
 	google.charts.load('current', {'packages':['annotationchart']});
 	google.charts.setOnLoadCallback(drawNewcomersTS);
-	google.charts.load('current', {'packages':['bar']});
+	google.charts.load('current', {packages: ['corechart', 'bar']});
 	google.charts.setOnLoadCallback(drawForksTS);
 	google.charts.setOnLoadCallback(drawPullsMergedTS);
 		
@@ -139,63 +139,57 @@
 		var data = new google.visualization.DataTable();
 		data.addColumn('datetime', 'Date');
 		data.addColumn('number', 'Forks');
-
+		data.addColumn({type: 'string', role: 'tooltip'});
 		var rows = []
 		{% for key, value in project.time_series.forks_ts.items %}
-		rows.push([new Date("{{ key }}"), {{ value }}]);
+		rows.push([new Date("{{ key }}"), {{ value }}, "{{key|slice:":10"}}  Forks: {{value}}"]);
 		{% endfor %}
 		rows.sort(function(a,b){return a[0].getTime() - b[0].getTime()})
 		data.addRows(rows);
 
-		var data_aggregated_by_month = google.visualization.data.group(
-        data, [{
-            'column': 0,
-            'aggregation': google.visualization.data.month,
-            'type': 'date'
-        }],
-        	  [{
-            'column': 1,
-            'aggregation': google.visualization.data.sum,
-            'type': 'number'
-        }]);
+		var groupedData = google.visualization.data.group(data, [{column: 0, modifier: getYearForRow, type: 'string', label: 'Year'}], [{column:1, aggregation: google.visualization.data.sum, type: 'number', label: 'Total Forks'}]);
 		
-		var options = {fontName: 'Rajdhani', curveType: 'function', vAxis: {logScale: false}, height:250};
+		var options = { fontName: 'Rajdhani',
+						height:250,
+						vAxis: { baseline: 0 },
+						bar: {
+ 							   groupWidth: '100%'
+						},
+						};
+
 		var {{project.project_id}}_forks_ts = new google.visualization.ColumnChart(document.getElementById('{{project.project_id}}_forks_ts'));		
-		{{project.project_id}}_forks_ts.draw(data_aggregated_by_month, options);
+		{{project.project_id}}_forks_ts.draw(groupedData, options);
 	};
 
 	function drawPullsMergedTS(){
 		var data = new google.visualization.DataTable();
 		data.addColumn('datetime', 'Date');
 		data.addColumn('number', 'Pulls Merged');
-
+		data.addColumn({type: 'string', role: 'tooltip'});
 		var rows = [];
-		{% for key, value in project.time_series.pulls_merged_ts.items %}
-		rows.push([new Date("{{ key }}"), {{ value }}]);
+		{% for key,value in project.time_series.pulls_merged_ts.items %}
+		rows.push([new Date("{{ key }}"), {{ value }}, '{{key|slice:":10"}}  Pulls Merged: {{value}}']);
 		{% endfor %}
 		rows.sort(function(a,b){return a[0].getTime() - b[0].getTime()})
 		data.addRows(rows);
+		
 
-		var data_aggregated_by_month = google.visualization.data.group(
-        data, [{
-            'column': 0,
-            'aggregation': google.visualization.data.year,
-            'type': 'date'
-        }],
-        	  [{
-            'column': 1,
-            'aggregation': google.visualization.data.sum,
-            'type': 'number'
-        }]);
+        var groupedData = google.visualization.data.group(data, [{column: 0, modifier: getYearForRow, type: 'string', label: 'Year'}], [{column:1, aggregation: google.visualization.data.sum, type: 'number', label: 'Total Pulls Merged'}]);
+        
 		
 		var options = { fontName: 'Rajdhani',
-		 				curveType: 'function',
-		 				vAxis: {logScale: false},
-		 				height:250
+		 				height:250,
+		 				vAxis: { baseline: 0 },
+		 				bar: {
+ 							   groupWidth: '100%'
+						},
 						};
 		var {{project.project_id}}_pulls_merged_ts = new google.visualization.ColumnChart(document.getElementById('{{project.project_id}}_pulls_merged_ts'));	
-		{{project.project_id}}_pulls_merged_ts.draw(data_aggregated_by_month, options);
+		{{project.project_id}}_pulls_merged_ts.draw(groupedData, options);
 	};
 
+	function getYearForRow(date){
+ 			return date.getFullYear().toString();
+		}
 	</script>
 {% endblock %}
