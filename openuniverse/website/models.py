@@ -1,6 +1,12 @@
+# -*- coding: utf-8 -*-
+'''
+    The models.py is responsible for defining the
+    sources of information available in our database.
+    Each class is a table, each variable is a column.
+'''
 from django.db import models
 
-class Project(models.Model): 
+class Project(models.Model):
     name = models.TextField()
     owner = models.TextField()
     owner_type = models.TextField()
@@ -13,7 +19,7 @@ class Project(models.Model):
     github_url = models.TextField()
 
 class ProjectStatistics(models.Model):
-    project = models.OneToOneField(Project, on_delete = models.CASCADE, primary_key = True)
+    project = models.OneToOneField(Project, on_delete=models.CASCADE, primary_key=True)
     pulls_merged_total = models.IntegerField()
     newcomers_total = models.IntegerField()
     open_issues_total = models.IntegerField()
@@ -25,12 +31,12 @@ class ProjectStatistics(models.Model):
     core_members_total = models.IntegerField()
 
 class ProjectFeatures(models.Model):
-    project = models.OneToOneField(Project, on_delete = models.CASCADE, primary_key = True)
+    project = models.OneToOneField(Project, on_delete=models.CASCADE, primary_key=True)
     has_contributing = models.BooleanField()
     has_readme = models.BooleanField()
     has_wiki = models.BooleanField()
 
 class TimeSeries(models.Model):
-    project = models.ForeignKey(Project, on_delete = models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
     count = models.IntegerField()
     date = models.DateTimeField()

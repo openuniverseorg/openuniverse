@@ -1,64 +1,112 @@
+# -*- coding: utf-8 -*-
+'''
+    The views.py is responsible for handling with web requests
+    and responses. The responses in our website
+    usually are HTML pages containing data.
+'''
 from django.shortcuts import render, redirect
-from website.models import Project
 from django.http import Http404
+from website.models import Project, ProjectStatistics, ProjectFeatures, TimeSeries
 
 def index(request):
-	context = {'projects': Project.objects.values_list('name', flat=True), 
-			   'licenses': Project.objects.values_list('software_license', flat=True).distinct(),
-			   'languages': Project.objects.values_list('main_language', flat=True).distinct(),
-			   'domains': Project.objects.values_list('application_domain', flat=True).distinct()}
-	return render(request, 'website/index.html', context)
+    '''
+        The index method is responsible for
+        handling index page requests.
+        The values used in index.html are transmitted
+        using the context variable.
+    '''
+    context = {
+        'projects': Project.objects.values_list('name', flat=True),
+        'licenses': Project.objects.values_list('software_license', flat=True).distinct(),
+        'languages': Project.objects.values_list('main_language', flat=True).distinct(),
+        'domains': Project.objects.values_list('application_domain', flat=True).distinct()
+        }
+
+    return render(request, 'website/index.html', context)
 
 def search(request):
-	name = request.GET.get('name')
+    '''
+        The search method is responsible for
+        handling requests of the search field, defined in the navbar.
+        When a request is done, the requested project is searched
+        in the database.
+    '''
+    name = request.GET.get('name')
 
-	try:
-		project = Project.objects.get(name=name)
-		return redirect('website:project', owner=project.owner, name=project.name)
-	except Project.DoesNotExist:
-		raise Http404('Project does not exist')
-	except Project.MultipleObjectsReturned:
-		project = Project.objects.get(name=name)[0]
-		return redirect('website:project', owner=project.owner, name=project.name)
+    try:
+        requested_project = Project.objects.get(name=name)
+        return redirect('website:project', owner=requested_project.owner, name=requested_project.name)
+    except Project.DoesNotExist:
+        raise Http404('Project does not exist')
+    except Project.MultipleObjectsReturned:
+        requested_project = Project.objects.get(name=name)[0]
+        return redirect('website:project', owner=requested_project.owner, name=requested_project.name)
 
-	return render(request, 'website:index.html')
-	
+    return render(request, 'website:index.html')
+
 def find(request):
-	languages = request.GET.getlist('language')
-	domains = request.GET.getlist('domain')
-	licenses = request.GET.getlist('license')
-	selected_projects = Project.objects
+    '''
+        The find method is responsible for
+        handling requests of the explore section, defined in the navbar.
+        When a request is done, the parameters defined in the section
+        are searched in the database. If no parameter is defined, all
+        the projects are returned to the find.html page.
+        The values used in find.html are transmitted
+        using the context variable.
+    '''
 
-	if len(languages) > 0:
-		selected_projects = selected_projects.filter(main_language__in=languages)
+    languages = request.GET.getlist('language')
+    domains = request.GET.getlist('domain')
+    licenses = request.GET.getlist('license')
+    selected_projects = Project.objects
 
-	if len(domains) > 0:
-		selected_projects = selected_projects.filter(application_domain__in=domains)
-	
-	if len(licenses) > 0:
-		selected_projects = selected_projects.filter(software_license__in=licenses)
+    if languages:
+        selected_projects = selected_projects.filter(main_language__in=languages)
 
-	context =  {'projects': Project.objects.values_list('name', flat=True), 
-				'licenses': Project.objects.values_list('software_license', flat=True).distinct(),
-				'languages': Project.objects.values_list('main_language', flat=True).distinct(),
-				'domains': Project.objects.values_list('application_domain', flat=True).distinct(),
-				'selected_projects': selected_projects.values_list('id', 'name', 'owner', 'software_license')}
+    if domains:
+        selected_projects = selected_projects.filter(application_domain__in=domains)
 
-	return render(request, 'website/find.html', context)
-							
+    if licenses:
+        selected_projects = selected_projects.filter(software_license__in=licenses)
+
+    context = {
+        'projects': Project.objects.values_list('name', flat=True), 
+        'licenses': Project.objects.values_list('software_license', flat=True).distinct(),
+        'languages': Project.objects.values_list('main_language', flat=True).distinct(),
+        'domains': Project.objects.values_list('application_domain', flat=True).distinct(),
+        'selected_projects': selected_projects.values_list('id', 'name', 'owner', 'software_license')
+        }
+
+    return render(request, 'website/find.html', context)
+
 def project(request, owner, name):
-	try:
-		requested_project = Project.objects.get(name=name,owner=owner)
-		context = {'project': project,
-				   'projects': Project.objects.values_list('name', flat=True),
-				   'licenses': Project.objects.values_list('software_license', flat=True).distinct(),
-				   'languages': Project.objects.values_list('main_language', flat=True).distinct(),
-				   'domains': Project.objects.values_list('application_domain', flat=True).distinct()}
-		return render(request, 'website/project.html', context)
-	except Project.DoesNotExist:
-		raise Http404('Project does not exist')
-	except Project.MultipleObjectsReturned:
-		raise Http404('Project does not exist')
+    '''
+        The project method is responsible for
+        handling projects requests. The values used in
+        project.html are transmitted using the context variable.
+    '''
+    try:
+        requested_project = Project.objects.get(name=name, owner=owner)
+
+        context = {
+            'project': requested_project,
+            'project_statistics': ProjectStatistics.objects.get(project=requested_project.id),
+            'project_features': ProjectStatistics.objects.get(project=requested_project.id),
+            'projects': Project.objects.values_list('name', flat=True),
+            'licenses': Project.objects.values_list('software_license', flat=True).distinct(),
+            'languages': Project.objects.values_list('main_language', flat=True).distinct(),
+            'domains': Project.objects.values_list('application_domain', flat=True).distinct()
+            }
+        return render(request, 'website/project.html', context)
+    except Project.DoesNotExist:
+        raise Http404('Project does not exist')
+    except Project.MultipleObjectsReturned:
+        raise Http404('Project does not exist')
 
 def handler404(request):
-	return render(request, 'website/error404.html', status=404)
+    '''
+        The handler404 method is responsible for
+        handling exceptions. A clear example
+        is the "DoesNotExist" exception.
+    '''
+    return render(request, 'website/error404.html', status=404)

@@ -107,6 +107,7 @@ body {
 
 .content {
   padding-top: 10px;
+  padding-bottom: 10px;
   background-color: #f7f7f7;
   border-top: 2px #ededed solid;
   border-bottom: 2px  #ededed solid;
