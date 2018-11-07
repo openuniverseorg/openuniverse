@@ -1,13 +1,14 @@
-<!-- Importing base.html as template -->
+<!-- Extending base.html as template -->
 {% extends 'website/base.html' %}
+<!-- Django -->
 {% load staticfiles %}
 {% load duration %}
 {% load mathfilters %}
-<!-- Page Title -->
+<!-- Title -->
 {% block title %} {{project.name}} {% endblock %}
-<!-- Page Stylesheets -->
+<!-- Stylesheets -->
 {%  block css %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/project.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/project.css' %}">
 {%endblock%}
 
 {% block body %}
@@ -59,7 +60,7 @@
 			<div class="row section-chart">
 				<div class="col-md-12">
 					<span class="section-chart-title">Newcomers:</span>
-					<div name="time-series" id="{{project.id}}_newcomers"></div>
+					<div name="time-series" id="newcomers_{{project.id}}"></div>
 				</div>
 			</div>
 			<div class="row section-chart">
@@ -88,31 +89,24 @@
 		var data = new google.visualization.DataTable();
 		data.addColumn('datetime', 'Date');
 		data.addColumn('number', 'Newcomers');
+		data.addRows([{% for value in newcomers_time_series %}[new Date({{ value.date | date:"Y, m, d" }}), {{ value.count }}], {% endfor %}]);
 		
-		var rows = []
-		{% for value in newcomers_time_series %}
-			rows.push([new Date("{{ value.date }}"), {{ value.count }}]);
-		{% endfor %}
-		rows.sort(function(a,b){return a[0].getTime() - b[0].getTime()})
-		data.addRows(rows);
+		var options = {
+			fontName: 'Rajdhani',
+			displayAnnotations: true,
+			title:'Newcomers (Daily)',
+			hAxis: {
+				title: 'Number of newcomers',
+			},
+			vAxis: {
+				title: 'Date',
+				logScale: false,
+			},
+			height:300
+		};
 		
-		var options = { fontName: 'Rajdhani',
-		displayAnnotations: true,
-		title:'Newcomers (Daily)',
-		
-		hAxis: {
-			title: 'Number of newcomers',
-		},
-		vAxis: {
-			title: 'Date',
-			logScale: false,
-		},
-		height:300,
-	};
-	
-	var {{project.id}}_newcomers = new google.visualization.AnnotationChart(document.getElementById('{{project.id}}_newcomers'));		
-	{{project.id}}_newcomers.draw(data, options);
-};
-
+		var newcomers_{{project.id}} = new google.visualization.AnnotationChart(document.getElementById('newcomers_{{project.id}}'));		
+		newcomers_{{project.id}}.draw(data, options);
+	};	
 </script>
 {% endblock %}
