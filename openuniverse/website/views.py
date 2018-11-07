@@ -90,6 +90,7 @@ def project(request, owner, name):
 
         context = {
             'project': requested_project,
+            'newcomers_time_series': TimeSeries.objects.filter(project=requested_project.id, data_type='newcomers'),
             'project_statistics': ProjectStatistics.objects.get(project=requested_project.id),
             'project_features': ProjectStatistics.objects.get(project=requested_project.id),
             'projects': Project.objects.values_list('name', flat=True),

@@ -34,9 +34,10 @@ class ProjectFeatures(models.Model):
     project = models.OneToOneField(Project, on_delete=models.CASCADE, primary_key=True)
     has_contributing = models.BooleanField()
     has_readme = models.BooleanField()
-    has_wiki = models.BooleanField()
 
 class TimeSeries(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    data_type = models.TextField()
     count = models.IntegerField()
     date = models.DateTimeField()
+    
