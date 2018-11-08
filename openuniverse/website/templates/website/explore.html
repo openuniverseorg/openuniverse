@@ -1,9 +1,9 @@
-<!-- Importing base.html as template -->
+<!-- Template -->
 {% extends 'website/base.html' %}
 {% load staticfiles %}
-<!-- Page Title -->
+<!-- Title -->
 {% block title %} Projects {% endblock %}
-<!-- Page Stylesheets -->
+<!-- CSS -->
 {% block css %}
 <link href="{% static 'css/find.css' %}" rel="stylesheet" type="text/css">
 {% endblock  %}
@@ -13,14 +13,14 @@
 		<div class="list-group">
 			<div class="list-header">
 				<span class="list-title">PROJECTS LIST</span>
-			</div>                       
+			</div>
 			{% for project in selected_projects %}
-			<a href="{% url 'website:project' project.2 project.1 %}" class="list-group-item">
+			<a href="{% url 'website:project' project.owner project.name %}" class="list-group-item">
 				<div class="row">
 					<div class="col-md-6">
-						<span class="list-group-item-title">{{project.1 | capfirst}}</span><br>
-						<span class="list-group-item-subtitle">Owned by {{project.2}}</span> <br>
-						<span class="list-group-item-subtitle">License: {{project.3}}</span>
+						<span class="list-group-item-title">{{project.name | capfirst}}</span><br>
+						<span class="list-group-item-subtitle">Owned by {{project.owner | capfirst}}</span> <br>
+						<span class="list-group-item-subtitle">License: {{project.license}}</span>
 					</div>
 				</div>
 			</a>

@@ -1,0 +1,36 @@
+.project-name {
+    font-size: 35px;
+    color: black;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.description {    
+    font-family: 'Rajdhani', sans-serif;
+    background-color: #efefef;
+    border: 1px #e0e0e0 solid;
+    font-size: 20px;
+}
+
+.description-item i {
+    font-size: 16px;
+    color: black;
+}
+
+.section-header-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.section-chart-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 24px;
+}
+
+.section {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px #e0e0e0 solid;
+    border-radius: 4px;
+    background-color: #efefef;
+}

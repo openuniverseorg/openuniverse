@@ -5,7 +5,7 @@ app_name = 'website'
 
 urlpatterns = [
     path('', views.index, name='index'), 
-    path('find/', views.find, name='find'),
+    path('explore/', views.explore, name='explore'),
     path('search/', views.search, name='search'),
     path('<str:owner>/<str:name>', views.project, name='project')
     ]
