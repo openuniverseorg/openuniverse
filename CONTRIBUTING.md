@@ -1,5 +1,5 @@
 # CONTRIBUTING
-If you did not setup your workspace yet, start by reading our Wikipage [[↗]](https://github.com/openuniverseorg/openuniverse/wiki). There, you will find all the necessary information to prepare your computer and start to contribution process.
+If you did not setup your workspace yet, start by reading our Wikipage [[↗]](https://github.com/openuniverseorg/openuniverse/wiki). There, you will find all the necessary information to prepare your computer and start the contribution process.
 
 ### Guidelines
 As an open source project, we are always interested in contributions from volunteers. However, for maintainability purposes, we request that contributors follow the guidelines described below:
