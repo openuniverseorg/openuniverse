@@ -2,6 +2,10 @@
 
 [![Build Status](https://travis-ci.com/openuniverseorg/openuniverse.svg?branch=master)](https://travis-ci.com/openuniverseorg/openuniverse)
 
+
+[![Discord](https://img.shields.io/discord/490547920412737548.svg)](https://discordapp.com/invite/wvwRDDj)
+
+
 Developers are often interested in joining the open source universe based on a set of motivations. Our mission is to provide the connection between open source projects who desire new contributors and interested developers who want to contribute.
 
 ## Submitting Projects
