@@ -108,24 +108,9 @@ def project(request, owner, name):
         raise Http404('Project does not exist')
 
 def handler404(request):
-<<<<<<< HEAD
-	return render(request, 'website/error404.html', status=404)
-
-#Auxiliar methods:
-def index_bar_chart_helper():
-	#This helper prepares the data for the fork chart
-	#names:
-	names = list(Projects.objects.all().values_list('name'))
-	#total_forks:
-	total_forks = [x['forks_total'] for x in list(Projects.objects.all().values_list('statistics'))]
-	#result:
-	liist = [[name,forks] for name,forks in zip(names,total_forks)]
-	return sorted(liist, key=itemgetter(1))[-5:]
-=======
     '''
         The handler404 method is responsible for
         handling exceptions. A clear example
         is the "DoesNotExist" exception.
     '''
     return render(request, 'website/error404.html', status=404)
->>>>>>> 8a58481ad1cd3369895d382eaee421ae2007b860
