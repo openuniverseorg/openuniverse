@@ -27,8 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['openuniverse.me','206.189.177.194', '127.0.0.1']
 
-# Application definition
-
 INSTALLED_APPS = [
     'website.apps.WebsiteConfig',
     'django.contrib.admin',

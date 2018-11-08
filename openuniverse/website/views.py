@@ -4,6 +4,7 @@
     and responses. The responses in our website
     usually are HTML pages containing data.
 '''
+from collections import Counter
 from django.shortcuts import render, redirect
 from django.http import Http404
 from website.models import Project, ProjectStatistics, ProjectFeatures, TimeSeries
@@ -19,7 +20,9 @@ def index(request):
         'projects': Project.objects.values_list('name', flat=True),
         'licenses': Project.objects.values_list('software_license', flat=True).distinct(),
         'languages': Project.objects.values_list('main_language', flat=True).distinct(),
-        'domains': Project.objects.values_list('application_domain', flat=True).distinct()
+        'domains': Project.objects.values_list('application_domain', flat=True).distinct(),
+        'projects_per_domain': dict(Counter(Project.objects.values_list('application_domain', flat=True))),
+        'projects_per_age': dict(Counter(Project.objects.values_list('age', flat=True)))
         }
 
     return render(request, 'website/index.html', context)
@@ -44,14 +47,14 @@ def search(request):
 
     return render(request, 'website:index.html')
 
-def find(request):
+def explore(request):
     '''
-        The find method is responsible for
+        The explore method is responsible for
         handling requests of the explore section, defined in the navbar.
         When a request is done, the parameters defined in the section
         are searched in the database. If no parameter is defined, all
-        the projects are returned to the find.html page.
-        The values used in find.html are transmitted
+        the projects are returned to the explore.html page.
+        The values used in explore.html are transmitted
         using the context variable.
     '''
 
@@ -74,10 +77,10 @@ def find(request):
         'licenses': Project.objects.values_list('software_license', flat=True).distinct(),
         'languages': Project.objects.values_list('main_language', flat=True).distinct(),
         'domains': Project.objects.values_list('application_domain', flat=True).distinct(),
-        'selected_projects': selected_projects.values_list('id', 'name', 'owner', 'software_license')
+        'selected_projects': selected_projects.values()
         }
 
-    return render(request, 'website/find.html', context)
+    return render(request, 'website/explore.html', context)
 
 def project(request, owner, name):
     '''

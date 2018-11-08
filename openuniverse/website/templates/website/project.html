@@ -1,4 +1,4 @@
-<!-- Extending base.html as template -->
+<!-- Template -->
 {% extends 'website/base.html' %}
 <!-- Django -->
 {% load staticfiles %}
@@ -6,7 +6,7 @@
 {% load mathfilters %}
 <!-- Title -->
 {% block title %} {{project.name}} {% endblock %}
-<!-- Stylesheets -->
+<!-- CSS -->
 {%  block css %}
 	<link rel="stylesheet" type="text/css" href="{% static 'css/project.css' %}">
 {%endblock%}
@@ -17,7 +17,9 @@
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-12">
-					<span class="project-name">{{project.owner}} / {{project.name}}</span>
+					<a href="{{project.github_url}}">
+						<span class="project-name">{{project.owner | capfirst}} / {{project.name | capfirst}}</span>
+					</a>
 				</div>
 			</div>	
 			
@@ -66,13 +68,13 @@
 			<div class="row section-chart">
 				<div class="col-md-12">
 					<span class="section-chart-title">Forks:</span>
-					<div name="time-series" id="{{project.id}}_forks"></div>
+					<div name="time-series" id=""></div>
 				</div>
 			</div>
 			<div class="row section-chart">
 				<div class="col-md-12">
 					<span class="section-chart-title">Pull-requests (Merged):</span>
-					<div name="time-series" id="{{project.id}}_pull_requests_merged"></div>
+					<div name="time-series" id=""></div>
 				</div>
 			</div>			
 		</div>
@@ -89,7 +91,7 @@
 		var data = new google.visualization.DataTable();
 		data.addColumn('datetime', 'Date');
 		data.addColumn('number', 'Newcomers');
-		data.addRows([{% for value in newcomers_time_series %}[new Date({{ value.date | date:"Y, m, d" }}), {{ value.count }}], {% endfor %}]);
+		data.addRows([{% for value in newcomers_time_series %}[new Date({{value.date | date:"Y, m, d"}}), {{value.count}}], {% endfor %}]);
 		
 		var options = {
 			fontName: 'Rajdhani',
