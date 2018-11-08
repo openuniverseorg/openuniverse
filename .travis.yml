@@ -3,12 +3,16 @@ language: python
 python:
   - "3.5"
 
+branches:
+  only:
+    - master
+
 services:
   - mysql
   
 env:
   DJANGO_DB_USER=travis
-  DJANGO_DB_PASS=
+  DJANGO_DB_PASS=""
 
 install:
   - pip install -r requirements.txt
