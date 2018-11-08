@@ -4,13 +4,10 @@ python:
   - "3.5"
 
 services:
-  - mongodb
+  - mysql
   
 install:
   - pip install -r requirements.txt
-  
-before_script:
-  mongorestore -d openuniverse dump/openuniverse
-  
+    
 script:
   python manage.py test
