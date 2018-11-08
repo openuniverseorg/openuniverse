@@ -18,6 +18,12 @@ class Project(models.Model):
     main_language = models.TextField()
     github_url = models.TextField()
 
+    class Meta:
+        verbose_name_plural = "Projects"
+
+    def __str__(self):
+        return self.name
+
 class ProjectStatistics(models.Model):
     project = models.OneToOneField(Project, on_delete=models.CASCADE, primary_key=True)
     pulls_merged_total = models.IntegerField()
@@ -30,14 +36,31 @@ class ProjectStatistics(models.Model):
     contributors_total = models.IntegerField()
     core_members_total = models.IntegerField()
 
+    class Meta:
+        verbose_name_plural = "Projects Statistics"
+
+    def __str__(self):
+        return self.project
+
 class ProjectFeatures(models.Model):
     project = models.OneToOneField(Project, on_delete=models.CASCADE, primary_key=True)
     has_contributing = models.BooleanField()
     has_readme = models.BooleanField()
+
+    class Meta:
+        verbose_name_plural = "Projects Features"
+
+    def __str__(self):
+        return self.project
 
 class TimeSeries(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     data_type = models.TextField()
     count = models.IntegerField()
     date = models.DateTimeField()
-    
+
+    class Meta:
+        verbose_name_plural = "Projects Time Series"
+
+    def __str__(self):
+        return self.project
