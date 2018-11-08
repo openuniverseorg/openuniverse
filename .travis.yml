@@ -6,8 +6,12 @@ python:
 services:
   - mysql
   
+env:
+  DJANGO_DB_USER=travis
+  DJANGO_DB_PASS=
+
 install:
   - pip install -r requirements.txt
-    
+
 script:
   python manage.py test

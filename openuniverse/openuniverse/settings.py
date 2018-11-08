@@ -1,3 +1,4 @@
+import os
 """
 Django settings for openuniverse project.
 
@@ -79,8 +80,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
         'NAME': 'openuniversedb',
-        'USER': 'root',
-        'PASSWORD': 'mechamoluiz',
+        'USER': os.environ['DJANGO_DB_USER'],
+        'PASSWORD': os.environ['DJANGO_DB_PASS'],
         'HOST': 'localhost',
         'PORT': '3306',
     }
