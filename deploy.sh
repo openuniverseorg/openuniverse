@@ -6,8 +6,6 @@ if [ $TRAVIS_BRANCH == 'master' ] ; then
   ssh-add ~/.ssh/id_rsa
 
   echo "[Travis CI] Deploying repository."
-  cd _site
-  git init
 
   git remote add deploy "openuniverse@206.189.177.194:/home/debian/openuniverse"
   git config user.name "Travis CI"
