@@ -14,7 +14,7 @@ after_success:
 - eval "$(ssh-agent -s)"
 - chmod 600 .travis/deploy_key
 - ssh-add .travis/deploy_key
-- git remote add deploy root@206.189.177.194:/home/debian/continuousdeployment.git
+- git remote add deploy openuniverse@206.189.177.194:/home/debian/continuousdeployment.git
 - git push deploy master
 install:
 - pip install -r requirements.txt
