@@ -7,7 +7,7 @@ if [ $TRAVIS_BRANCH == 'master' ] ; then
 
   echo "[Travis CI] Deploying repository."
   ls
-  git remote add deploy "openuniverse@206.189.177.194:/home/debian/openuniverse"
+  git remote add deploy "openuniverse@206.189.177.194:/home/debian/continuousdeployment.git"
   git config user.name "Travis CI"
   git config user.email "fronchetti@usp.br"
 
