@@ -6,6 +6,9 @@ branches:
   - master
 services:
 - mysql
+addons:
+  ssh_known_hosts:
+  - 206.189.177.194
 env: DJANGO_DB_USER=travis DJANGO_DB_PASS=""
 after_success:
 - eval "$(ssh-agent -s)"
