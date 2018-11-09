@@ -16,7 +16,7 @@ env: DJANGO_DB_USER=travis
 before_install:
 - openssl aes-256-cbc -K $encrypted_54b5c2691b2b_key -iv $encrypted_54b5c2691b2b_iv
   -in deploy_key.enc -out deploy_key -d
-<<<<<<< HEAD
+
 after_success:
   - eval "$(ssh-agent -s)" #start the ssh agent
   - chmod 600 .travis/deploy_key.enc # this key should have push access
@@ -24,16 +24,6 @@ after_success:
   - git remote add deploy root@206.189.177.194:/home/debian/openuniverse/
   - git push deploy
 
-=======
-
 install:
 - pip install -r requirements.txt
 script: python source/manage.py test
-  
-after_success:
-  - eval "$(ssh-agent -s)"
-  - chmod 600 deploy_key # this key should have push access
-  - ssh-add deploy_key
-  - git remote add deploy root@206.189.177.194:/home/debian/openuniverse
-  - git push deploy
->>>>>>> 2469f26d1cc7c08f6b2679ad9f1fab6af34cb0b0
