@@ -12,8 +12,8 @@ addons:
 env: DJANGO_DB_USER=travis DJANGO_DB_PASS=""
 after_success:
 - eval "$(ssh-agent -s)"
-- chmod 600 .travis/deploy_key
-- ssh-add .travis/deploy_key
+- chmod 600 deploy_key
+- ssh-add deploy_key
 - git remote add deploy openuniverse@206.189.177.194:/home/debian/continuousdeployment.git
 - git push deploy master
 install:
@@ -21,4 +21,4 @@ install:
 script: python source/manage.py test
 before_install:
 - openssl aes-256-cbc -K $encrypted_54b5c2691b2b_key -iv $encrypted_54b5c2691b2b_iv
-  -in .travis/deploy_key.enc -out .travis/deploy_key -d
+  -in .travis/deploy_key.enc -out deploy_key -d
