@@ -1,29 +1,21 @@
 language: python
-
 python:
 - '3.5'
-
 branches:
   only:
   - master
-
 services:
 - mysql
-
-env: DJANGO_DB_USER=travis
-     DJANGO_DB_PASS=""
-
-before_install:
-- openssl aes-256-cbc -K $encrypted_54b5c2691b2b_key -iv $encrypted_54b5c2691b2b_iv
-  -in deploy_key.enc -out deploy_key -d
-
+env: DJANGO_DB_USER=travis DJANGO_DB_PASS=""
 after_success:
-  - eval "$(ssh-agent -s)" #start the ssh agent
-  - chmod 600 .travis/deploy_key.enc # this key should have push access
-  - ssh-add .travis/deploy_key.enc
-  - git remote add deploy root@206.189.177.194:/home/debian/openuniverse/
-  - git push deploy
-
+- eval "$(ssh-agent -s)"
+- chmod 600 .travis/deploy_key
+- ssh-add .travis/deploy_key
+- git remote add deploy root@206.189.177.194:/home/debian/openuniverse/
+- git push deploy
 install:
 - pip install -r requirements.txt
 script: python source/manage.py test
+before_install:
+- openssl aes-256-cbc -K $encrypted_54b5c2691b2b_key -iv $encrypted_54b5c2691b2b_iv
+  -in deploy_key.enc -out deploy_key -d
