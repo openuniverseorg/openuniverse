@@ -10,7 +10,7 @@ if [ $TRAVIS_BRANCH == 'master' ] ; then
   git config user.name "Travis CI"
   git config user.email "fronchetti@usp.br"
   git add .
-  git commit -m "Deploy"
+  git commit -m "[Travis CI] Continuous Deployment"
   git push --force deploy master
 else
   echo "[Travis CI] Not deploying, since this branch is not master."
