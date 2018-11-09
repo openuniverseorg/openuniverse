@@ -1,21 +1,15 @@
 language: python
-
 python:
-  - "3.5"
-
+- '3.5'
 branches:
   only:
-    - master
-
+  - master
 services:
-  - mysql
-  
-env:
-  DJANGO_DB_USER=travis
-  DJANGO_DB_PASS=""
-
+- mysql
+env: DJANGO_DB_USER=travis DJANGO_DB_PASS=""
 install:
-  - pip install -r requirements.txt
-
-script:
-  python source/manage.py test
+- pip install -r requirements.txt
+script: python source/manage.py test
+before_install:
+- openssl aes-256-cbc -K $encrypted_9969ed962cad_key -iv $encrypted_9969ed962cad_iv
+  -in deploy_key.enc -out deploy_key -d
