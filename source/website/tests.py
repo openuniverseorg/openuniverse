@@ -1,3 +1,7 @@
+'''
+	Testing components is a fundamental step on developing good software solutions. 
+	Here are defined some of the test this Django app performs when new features are added.
+'''
 from django.test import TestCase
 from .models import Project
 

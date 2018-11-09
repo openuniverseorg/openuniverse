@@ -11,8 +11,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
-import os
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -26,8 +24,18 @@ SECRET_KEY = 'nw1o9-jssq-u6q&wi7rt6z=ar@%l%zrv$-#%6n0!iwh99_7iz_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+'''Allowed Hosts:
+    A list of strings representing the host/domain names that this Django site can serve.
+    This is a security measure to prevent HTTP Host header attacks, which are possible even under many seemingly-safe web server configurations.
+'''
 ALLOWED_HOSTS = ['openuniverse.me','206.189.177.194', '127.0.0.1']
 
+
+'''
+    Installed Apps:
+    A list of strings designating all applications that are enabled in this Django installation.
+    Each string should be a dotted Python path to:
+'''
 INSTALLED_APPS = [
     'website.apps.WebsiteConfig',
     'django.contrib.admin',
@@ -39,6 +47,11 @@ INSTALLED_APPS = [
     'mathfilters'      
 ]
 
+'''
+    Midleware:
+    A framework of hooks into Django’s request/response processing.
+    It’s a light, low-level “plugin” system for globally altering Django’s input or output.
+'''
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -48,9 +61,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+ 
 ROOT_URLCONF = 'openuniverse.urls'
 
+'''
+    Templates:
+    A list containing the settings for all template engines to be used with Django.
+    Each item of the list is a dictionary containing the options for an individual engine.
+'''
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -76,6 +94,11 @@ WSGI_APPLICATION = 'openuniverse.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 # https://www.digitalocean.com/community/tutorials/how-to-use-postgresql-with-your-django-application-on-ubuntu-14-04
 
+'''
+    Databases:
+    A dictionary containing the settings for all databases to be used with Django.
+    It is a nested dictionary whose contents map a database alias to a dictionary containing the options for an individual database.
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
@@ -122,8 +145,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-
+# URL to use when referring to static files located in STATIC_ROOT:
 STATIC_URL = '/static/'
+
+'''
+    This setting defines the additional locations the staticfiles app will traverse if the FileSystemFinder finder is enabled, e.g.
+    If you use the collectstatic or findstatic management command or use the static file serving view.
+'''
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "website/static"),
 ]
