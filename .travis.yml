@@ -18,9 +18,9 @@ before_install:
   -in deploy_key.enc -out deploy_key -d
 
 after_success:
-  - eval "$(ssh-agent -s)" #start the ssh agent
-  - chmod 600 .travis/deploy_key.enc # this key should have push access
-  - ssh-add .travis/deploy_key.enc
+  - eval "$(ssh-agent -s)"
+  - chmod 600 .travis/deploy_key
+  - ssh-add .travis/deploy_key
   - git remote add deploy root@206.189.177.194:/home/debian/openuniverse/
   - git push deploy
 
