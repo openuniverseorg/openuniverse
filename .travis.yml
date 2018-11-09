@@ -18,4 +18,4 @@ install:
   - pip install -r requirements.txt
 
 script:
-  python openuniverse/manage.py test
+  python source/manage.py test
