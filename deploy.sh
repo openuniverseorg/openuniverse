@@ -6,7 +6,7 @@ if [ $TRAVIS_BRANCH == 'master' ] ; then
   ssh-add ~/.ssh/id_rsa
   echo "[Travis CI] Deploying repository."
   git remote add deploy openuniverse@206.189.177.194:/home/debian/continuousdeployment.git
-  git push --force deploy master
+  git push deploy master
 else
   echo "[Travis CI] Not deploying, since this branch is not master."
 fi
