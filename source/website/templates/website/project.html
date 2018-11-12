@@ -18,7 +18,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<a href="{{project.github_url}}">
-						<span class="project-name">{{project.owner | capfirst}} / {{project.name | capfirst}}</span>
+						<span class="project-name">{{ project.owner | capfirst }} / {{ project.name | capfirst }}</span>
 					</a>
 				</div>
 			</div>	
@@ -27,25 +27,25 @@
 				<div class="col-md-3 text-center">
 					<span class="description-item">
 						<i class="fas fa-bullseye"></i>
-						{{project.application_domain}}
+						{{ project.application_domain }}
 					</span>
 				</div>
 				<div class="col-md-3 text-center">
 					<span class="description-item">
 						<i class="fas fa-code"></i>
-						{{project.main_language}}
+						{{ project.main_language }}
 					</span>
 				</div>
 				<div class="col-md-3 text-center">
 					<span class="description-item">
 						<i class="fas fa-balance-scale"></i>
-						{{project.software_license}}
+						{{ project.software_license }}
 					</span>
 				</div>
 				<div class="col-md-3 text-center">
 					<span class="description-item">
 						<i class="far fa-clock"></i>
-						{{project.age}} year(s) of existence
+						{{ project.age }} year(s) of existence
 					</span>
 				</div>
 			</div>
@@ -62,7 +62,7 @@
 			<div class="row section-chart">
 				<div class="col-md-12">
 					<span class="section-chart-title">Newcomers:</span>
-					<div name="time-series" id="newcomers_{{project.id}}"></div>
+					<div name="time-series" id="newcomers_{{ project.id }}"></div>
 				</div>
 			</div>
 			<div class="row section-chart">
@@ -91,7 +91,7 @@
 		var data = new google.visualization.DataTable();
 		data.addColumn('datetime', 'Date');
 		data.addColumn('number', 'Newcomers');
-		data.addRows([{% for value in newcomers_time_series %}[new Date({{value.date | date:"Y, m, d"}}), {{value.count}}], {% endfor %}]);
+		data.addRows([{% for value in newcomers_time_series %}[new Date({{ value.date | date:"Y, m, d" }}), {{ value.count }}], {% endfor %}]);
 		
 		var options = {
 			fontName: 'Rajdhani',
@@ -107,8 +107,8 @@
 			height:300
 		};
 		
-		var newcomers_{{project.id}} = new google.visualization.AnnotationChart(document.getElementById('newcomers_{{project.id}}'));		
-		newcomers_{{project.id}}.draw(data, options);
+		var newcomers_{{ project.id }} = new google.visualization.AnnotationChart(document.getElementById('newcomers_{{ project.id }}'));		
+		newcomers_{{ project.id }}.draw(data, options);
 	};	
 </script>
 {% endblock %}

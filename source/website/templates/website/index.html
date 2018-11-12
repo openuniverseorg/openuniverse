@@ -21,7 +21,7 @@
 				a group of metrics. The analysis proposed here does not necessarly represent the truth, but might be a good
 				start point for newcomers.</p>
 				<p>
-					We encourage you to explore over the {{projects.count}} projects data available for analysis and findings into the open source community. Here's how these projects are distributed in matter of their domain:
+					We encourage you to explore over the {{ projects.count }} projects data available for analysis and findings into the open source community. Here's how these projects are distributed in matter of their domain:
 				</p>
 			</div>
 			
@@ -73,7 +73,7 @@
 		var data = new google.visualization.DataTable();
 		data.addColumn('string','Domain');
 		data.addColumn('number','Ocurrences');
-		data.addRows([{% for domain, value in projects_per_domain.items %}["{{domain}}", {{value}}], {% endfor %}]);
+		data.addRows([{% for domain, value in projects_per_domain.items %}["{{ domain }}", {{ value }}], {% endfor %}]);
 
 		var options = {
 			chartArea: { width: '100%', height: '100%'},
@@ -101,7 +101,7 @@
 		var data = new google.visualization.DataTable();
 		data.addColumn('string','Domain');
 		data.addColumn('number','Ocurrences');
-		data.addRows([{% for age, value in projects_per_age.items %}["{{age}}", {{value}}], {% endfor %}]);
+		data.addRows([{% for age, value in projects_per_age.items %}["{{ age }}", {{ value }}], {% endfor %}]);
 
 		var options = {
 			chartArea: { width: '100%', height: '100%'},
