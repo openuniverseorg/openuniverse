@@ -8,7 +8,6 @@ from collections import Counter
 from django.shortcuts import render, redirect
 from django.http import Http404
 from website.models import Project, ProjectStatistics, ProjectFeatures, TimeSeries
-
 def index(request):
     '''
         The index method is responsible for
