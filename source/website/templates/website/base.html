@@ -62,7 +62,7 @@
 									{% for language in languages %}
 										<div class="form-check form-check-inline">
 											<label class="form-check-label checkbox-text">
-												<input class="form-check-input" type="checkbox" value="{{language}}" name="language">{{language}}
+												<input class="form-check-input" type="checkbox" value="{{language}}" name="language">{{ language }}
 											</label>
 										</div>
 									{% endfor %}
@@ -75,7 +75,7 @@
 									{% for domain in domains %}
 										<div class="form-check form-check-inline">
 											<label class="form-check-label checkbox-text">
-												<input class="form-check-input" type="checkbox" value="{{domain}}" name="domain">{{domain}}
+												<input class="form-check-input" type="checkbox" value="{{ domain }}" name="domain">{{ domain }}
 											</label>
 										</div>
 									{% endfor %}
@@ -88,7 +88,7 @@
 									{% for license in licenses %}
 										<div class="form-check form-check-inline">
 											<label class="form-check-label checkbox-text">
-												<input class="form-check-input" type="checkbox" value="{{license}}" name="license">{{license}}
+												<input class="form-check-input" type="checkbox" value="{{ license }}" name="license">{{ license }}
 											</label>
 										</div>
 									{% endfor %}

@@ -2,7 +2,6 @@
 #
 [![Build Status](https://travis-ci.com/openuniverseorg/openuniverse.svg?branch=master)](https://travis-ci.com/openuniverseorg/openuniverse)
 
-
 Developers are often interested in joining the open source universe based on a set of motivations. Our mission is to provide the connection between open source projects who desire new contributors and interested developers who want to contribute.
 
 ## Submit Project
@@ -20,4 +19,4 @@ You can also check the list of contributors who are participating in this projec
 ## License
 Read the LICENSE.md to understand the rights and limitations of our software (GPL 3.0) [[↗]](https://github.com/openuniverseorg/openuniverse/blob/master/LICENSE.md). 
 
-
+> Logotype made by <a href="https://www.flaticon.com/authors/eucalyp" title="Eucalyp" target="_blank">Eucalyp</a> from <a href="https://www.flaticon.com/" title="Flaticon" target="_blank">www.flaticon.com</a> (Licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>)

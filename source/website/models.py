@@ -6,6 +6,9 @@
 '''
 from django.db import models
 
+'''
+    The Project model handles basic information of a project.
+''' 
 class Project(models.Model):
     name = models.TextField()
     owner = models.TextField()
@@ -24,6 +27,10 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
+'''
+    ProjectStatistics has some important metrics on a project
+    It's linked by an on_to_one relation to the Project model
+'''
 class ProjectStatistics(models.Model):
     project = models.OneToOneField(Project, on_delete=models.CASCADE, primary_key=True)
     pulls_merged_total = models.IntegerField()
@@ -42,6 +49,11 @@ class ProjectStatistics(models.Model):
     def __str__(self):
         return self.project
 
+
+'''
+    Some features a projects repository might have
+    It's linked by an on_to_one relation to the Project model
+'''
 class ProjectFeatures(models.Model):
     project = models.OneToOneField(Project, on_delete=models.CASCADE, primary_key=True)
     has_contributing = models.BooleanField()
@@ -53,6 +65,11 @@ class ProjectFeatures(models.Model):
     def __str__(self):
         return self.project
 
+'''
+    A project's timeSeries tells much about what happened to the repository in a given day.
+    It's largely used for charts construction and data analysis.
+    It's linked by an on_to_one relation to the Project model
+'''
 class TimeSeries(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     data_type = models.TextField()
