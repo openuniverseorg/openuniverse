@@ -2,11 +2,14 @@ from django.shortcuts import render
 from rest_framework import generics
 from website.models import Project, ProjectStatistics, ProjectFeatures, TimeSeries
 from .serializers import ProjectSerializer, ProjectStatisticsSerializer, ProjectFeaturesSerializer, TimeSeriesSerializer
+
 '''
 ModelList method return single instances of a certain model, a read-only endpoint.
 ModelDetail methods return single deatailed instances of a certain model, supporting CRUD API operations.
 
 '''
+# This variable sets read-only permission to not authenticated users to
+# all endpoints
 
 
 class ProjectList(generics.ListCreateAPIView):
