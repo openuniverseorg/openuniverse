@@ -27,6 +27,9 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
+    def __unicode__(self):
+        return self.name
+
 '''
     ProjectStatistics has some important metrics on a project
     It's linked by an on_to_one relation to the Project model
@@ -49,6 +52,8 @@ class ProjectStatistics(models.Model):
     def __str__(self):
         return self.project
 
+    def __unicode__(self):
+        return self.project
 
 '''
     Some features a projects repository might have
@@ -63,6 +68,9 @@ class ProjectFeatures(models.Model):
         verbose_name_plural = "Projects Features"
 
     def __str__(self):
+        return self.project
+
+    def __unicode__(self):
         return self.project
 
 '''
@@ -80,4 +88,7 @@ class TimeSeries(models.Model):
         verbose_name_plural = "Projects Time Series"
 
     def __str__(self):
+        return self.project
+
+    def __unicode__(self):
         return self.project

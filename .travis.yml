@@ -4,6 +4,7 @@ python:
 branches:
   only:
   - master
+  - development
 services:
 - mysql
 addons:
