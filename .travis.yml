@@ -19,5 +19,5 @@ before_install:
   -in .travis/deploy_key.enc -out deploy_key -d
 - chmod 600 deploy_key
 - mv deploy_key ~/.ssh/id_rsa
-after_success:
-- bash ./deploy.sh
+# after_success:
+# - bash ./deploy.sh
