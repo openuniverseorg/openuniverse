@@ -10,33 +10,27 @@
 
 {% block body %}
 	<div class="container text-justify">
-		<div class="jumbotron jumbotron-fluid">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-							<h1 class="jumbotron-title"><b>Made for newcomers</b></h1>
-							<p class="lead">Open Universe is an analysis platform designed to help new contributors find open source projects. Give yourself the opportunity to join this universe!</p>
-					</div>
-				</div>
-			</div>
-		</div>
 		<div class="row">
-			<div class="col-md-6">
-				<span class="section-title">Abstract</span>
-				<p>Developers are often interested in joining open source communities based on a set of motivations. Our mission
-				is to provide the connection between open source projects who desire new contributors and interested developers
-				who want to contribute.</p>
-				<p>The analysis proposed in this website are based on <i>Wiese et. al methodology</i>,
-				who tryed to comprehend how projects receptivity can be defined in open source projects, taking into consideration
-				a group of metrics (e.g. programming languages and software license). The analysis proposed in our platform does not necessarly
-				represent the real projects receptivity, but might be a good start point for newcomers to find interested open source projects.
-				We encourage you to explore the {{ projects.count }} projects available in our platform! </p>
+			<div class="col-md-12">
+				<span class="section-title">Dataset</span>
+				<div class="row">
+					<div class="item col-md-6">
+						<span class="item-title">DOMAIN</span>
+						<div id="projects_per_domain"></div>
+					</div>
+					<div class="item col-md-6">
+						<span class="item-title">AGE</span>
+						<div id="projects_per_age"></div>
+					</div>	
+					<div class="item col-md-6">
+						<span class="item-title">LICENSE</span>
+						<div id="projects_per_license"></div>
+					</div>	
+				</div>
 			</div>
 		</div>
 	</div>
 {% endblock %}
-
-
 
 {% block javascript %}
 <!-- Number of projects by domain -->

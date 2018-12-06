@@ -4,10 +4,11 @@
     and responses. The responses in our website
     usually are HTML pages containing data.
 '''
-from collections import Counter
+from collections import Counter, OrderedDict
 from django.shortcuts import render, redirect
 from django.http import Http404
 from website.models import Project, ProjectStatistics, ProjectFeatures, TimeSeries
+
 def index(request):
     '''
         The index method is responsible for
@@ -20,11 +21,22 @@ def index(request):
         'licenses': Project.objects.values_list('software_license', flat=True).distinct(),
         'languages': Project.objects.values_list('main_language', flat=True).distinct(),
         'domains': Project.objects.values_list('application_domain', flat=True).distinct(),
-        'projects_per_domain': dict(Counter(Project.objects.values_list('application_domain', flat=True))),
-        'projects_per_age': dict(Counter(Project.objects.values_list('age', flat=True)))
         }
 
     return render(request, 'website/index.html', context)
+
+def overview(request):
+    context = {
+        'projects': Project.objects.values_list('name', flat=True),
+        'licenses': Project.objects.values_list('software_license', flat=True).distinct(),
+        'languages': Project.objects.values_list('main_language', flat=True).distinct(),
+        'domains': Project.objects.values_list('application_domain', flat=True).distinct(),
+        'projects_per_domain': OrderedDict(Counter(Project.objects.values_list('application_domain', flat=True)).most_common()),
+        'projects_per_license': OrderedDict(Counter(Project.objects.values_list('software_license', flat=True)).most_common()),
+        'projects_per_age': dict(Counter(Project.objects.values_list('age', flat=True)))
+        }
+
+    return render(request, 'website/overview.html', context)
 
 def search(request):
     '''

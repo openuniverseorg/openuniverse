@@ -1,5 +1,6 @@
 {% load staticfiles %}
 
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<!-- Meta -->
@@ -18,31 +19,52 @@
 		<!-- Icon -->
 		<link rel="icon" href="{% static 'img/neptune.png' %}">
 		<!-- Fonts -->
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 		<link href="https://fonts.googleapis.com/css?family=Rajdhani:400,700" rel="stylesheet">
 	</head>
 	<body>
 		<!-- Navbar -->
-		<nav class="navbar navbar-fixed-top">
+		<nav class="navbar navbar-fixed-top navbar-expand-lg navbar-light">
 			<div class="container navbar-container">
-				<!-- Title -->
+				<!-- Brand -->
 				<a href="{% url 'website:index' %}" class="navbar-brand">
-					<span class="navbar-title">OPEN UNIVERSE</span>
-					<img class="navbar-logo" src="{% static 'img/neptune.png' %}" alt="Made by Eucalpy"/>
+					<span class="navbar-title align-middle">OPEN UNIVERSE</span>
+					<img class="navbar-logo align-middle" src="{% static 'img/neptune.png' %}" alt="Made by Eucalpy"/>
 				</a>
-				<!-- Explore Modal -->
-				<a class="navbar-btn" data-toggle="modal" data-target=".explore-modal" href="">EXPLORE</a>
-				<!-- Submit Hyperlink -->
-				<a class="navbar-btn" href="https://github.com/openuniverseorg/openuniverse">SUBMIT PROJECT</a>
-				<!-- Search Field -->
-				<form class="navbar-form navbar-right"  id="searchform" action="{% url 'website:search' %}" method="get" accept-charset="utf-8">
-					<div class="search input-group">
-						<input type="text" name="name" class="search-field form-control" placeholder="Search" id="search-field">
-						<span class="search-icon fa fa-search"></span>
-					</div>
-				</form>	
-				<!-- Contribute Hyperlink -->
-				<a class="navbar-btn" href="https://github.com/openuniverseorg/openuniverse/wiki">CONTRIBUTE</a>
+
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse" id="navbarToggler">					
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<!-- Dataset -->
+							<a class="nav-link" href="{% url 'website:overview' %}">Overview</a>
+						</li>
+						<li class="nav-item">
+							<!-- Explore Modal -->
+							<a class="nav-link" data-toggle="modal" data-target=".explore-modal" href="">Explore</a>
+						</li>
+						<li class="nav-item">
+							<!-- Submit Hyperlink -->
+							<a class="nav-link" href="https://github.com/openuniverseorg/openuniverse" target="__blank">Submit</a>
+						</li>
+
+						<li class="nav-item">
+							<!-- Search Field -->
+							<form class="navbar-form nav-link"  id="searchform" action="{% url 'website:search' %}" method="get" accept-charset="utf-8">
+								<div class="input-group">
+									<input type="text" name="name" class="search form-control" placeholder="Search for a project" id="search">
+								</div>
+							</form>	
+						</li>
+						<li class="nav-item">
+							<!-- Contribute Hyperlink -->
+							<a class="nav-link" href="https://github.com/openuniverseorg/openuniverse/wiki">Contribute</a>
+						</li>
+					</ul>
+
+				</div>
 			</div>
 		</nav>
 
@@ -50,55 +72,56 @@
 		<div class="modal fade explore-modal" tabindex="-1" role="dialog" aria-labelledby="Explore available projects" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
-					<div class="container">
-						<!-- Title -->
-						<span class="modal-explore-title">FIND A PROJECT</span>
-						<hr>
-						<form method="GET" action="{% url 'website:explore'%}">
-							<div class="modal-explore-item">
-								<!-- Filter by language -->
-								<p class="modal-explore-item-title">Languages:</p>
-								<div class="row modal-explore-item-row">
-									{% for language in languages %}
-										<div class="form-check form-check-inline">
-											<label class="form-check-label checkbox-text">
-												<input class="form-check-input" type="checkbox" value="{{language}}" name="language">{{ language }}
-											</label>
-										</div>
-									{% endfor %}
+						<div class="modal-header">
+							<!-- Title -->
+							<span class="modal-title">EXPLORE</span>
+						</div>
+						<div class="modal-body">
+							<form method="GET" action="{% url 'website:explore'%}">
+								<div class="modal-explore-item">
+									<!-- Filter by language -->
+									<p class="modal-explore-item-title">Languages:</p>
+									<div class="row modal-explore-item-row">
+										{% for language in languages %}
+											<div class="form-check form-check-inline">
+												<label class="form-check-label checkbox-text">
+													<input class="form-check-input" type="checkbox" value="{{language}}" name="language">{{ language }}
+												</label>
+											</div>
+										{% endfor %}
+									</div>
 								</div>
-							</div>
-							<div class="modal-explore-item">
-								<!-- Filter by application domain -->
-								<p class="modal-explore-item-title">Domains:</p>
-								<div class="row modal-explore-item-row">
-									{% for domain in domains %}
-										<div class="form-check form-check-inline">
-											<label class="form-check-label checkbox-text">
-												<input class="form-check-input" type="checkbox" value="{{ domain }}" name="domain">{{ domain }}
-											</label>
-										</div>
-									{% endfor %}
+								<div class="modal-explore-item">
+									<!-- Filter by application domain -->
+									<p class="modal-explore-item-title">Domains:</p>
+									<div class="row modal-explore-item-row">
+										{% for domain in domains %}
+											<div class="form-check form-check-inline">
+												<label class="form-check-label checkbox-text">
+													<input class="form-check-input" type="checkbox" value="{{ domain }}" name="domain">{{ domain }}
+												</label>
+											</div>
+										{% endfor %}
+									</div>
 								</div>
-							</div>
-							<div class="modal-explore-item">
-								<!-- Filter by software license -->
-								<p class="modal-explore-item-title">Licenses:</p>
-								<div class="row modal-explore-item-row">
-									{% for license in licenses %}
-										<div class="form-check form-check-inline">
-											<label class="form-check-label checkbox-text">
-												<input class="form-check-input" type="checkbox" value="{{ license }}" name="license">{{ license }}
-											</label>
-										</div>
-									{% endfor %}
+								<div class="modal-explore-item">
+									<!-- Filter by software license -->
+									<p class="modal-explore-item-title">Licenses:</p>
+									<div class="row modal-explore-item-row">
+										{% for license in licenses %}
+											<div class="form-check form-check-inline">
+												<label class="form-check-label checkbox-text">
+													<input class="form-check-input" type="checkbox" value="{{ license }}" name="license">{{ license }}
+												</label>
+											</div>
+										{% endfor %}
+									</div>
 								</div>
-							</div>
-							<hr>
-							<div class="modal-explore-item text-center">
-								<button type="submit" value="Submit" class="btn modal-explore-btn">FIND</button>
-							</div>
-						</form>
+								<hr>
+								<div class="modal-explore-item text-center">
+									<button type="submit" value="Submit" class="btn modal-explore-btn">FIND</button>
+								</div>
+							</form>
 					</div>
 				</div>
 			</div>
@@ -112,13 +135,12 @@
 			
 		<!-- Footer -->
 		<footer class="footer">
-			<div class="container footer-container">
+			<div class="container">
 				<div class="row">
 					<div class="col-md-6">
 						<!-- Partners -->
-						<div>Website supported by <a href="http://www5.usp.br/english/?lang=en" target="_blank">USP</a>, <a href="http://www.utfpr.edu.br/estrutura-universitaria/pro-reitorias/prorec/diretoria-de-relacoes-interinstitucionais/international-affairs-eng/about-us"
-							target="_blank">UTFPR</a> and <a href="http://www.fapesp.br/en/" target="_blank">FAPESP</a> <i class="fas fa-graduation-cap"
-							style="color:black;"></i>.
+						<div>We are supported by <a href="http://www5.usp.br/english/?lang=en" target="_blank">USP</a>, <a href="http://www.utfpr.edu.br/estrutura-universitaria/pro-reitorias/prorec/diretoria-de-relacoes-interinstitucionais/international-affairs-eng/about-us"
+							target="_blank">UTFPR</a> and <a href="http://www.fapesp.br/en/" target="_blank">FAPESP</a>.
 						</div>
 						<!-- Copyright -->
 						<div>Logotype made by <a href="https://www.flaticon.com/authors/eucalyp" title="Eucalyp" target="_blank">Eucalyp</a>
@@ -135,6 +157,11 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+		<script>
+			$(function () {
+  				$('[data-toggle="tooltip"]').tooltip()
+			})
+		</script>
 		{% block javascript %} <!-- Empty space for custom javascript --> {% endblock %}
 	</body>	
 </html>

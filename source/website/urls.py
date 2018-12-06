@@ -7,5 +7,6 @@ urlpatterns = [
     path('', views.index, name='index'), 
     path('explore/', views.explore, name='explore'),
     path('search/', views.search, name='search'),
+    path('overview/', views.overview, name='overview'),
     path('<str:owner>/<str:name>', views.project, name='project')
     ]
