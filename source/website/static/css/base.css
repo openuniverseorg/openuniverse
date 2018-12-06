@@ -1,64 +1,62 @@
 
 body {
     font-family: 'Helvetica', 'Arial', sans-serif;
-    background-color: #F6F9FA;
+    background-color: #fff !important;
   }
   
 /**********************
         NAVBAR
 ***********************/
 
+.navbar-toggler {
+  color: black;
+}
+
 .navbar-logo{
-  width: 2.5em;
+  width: 2em;
   height: auto;
-  margin-bottom: 1em;
 }
 
 .navbar-title {
+  font-family: 'Rajdhani', sans-serif;
   margin-right: 0.25em;
-  font-size: 2.25em;
+  font-size: 1.8em;
   color: black;
-  font-family: 'Rajdhani', sans-serif;
+
 }
 
-.navbar-btn, .navbar-btn:visited, .navbar-btn:link, .navbar-btn:active {
+.nav-link {
+  font-family: 'Rajdhani', sans-serif;
   text-decoration: none;
-  color: black;
-  font-size: 1.5em;
-  font-weight: bold;
-  outline:0;
-  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.55em;
+  color: black !important;
 }
 
-.navbar-btn:hover {
-  color: gray;
+.nav-link:hover {
+  color: gray !important;
 }
 
 .search {
-  position: relative;
+  border-radius: 5px !important;
 }
 
-.search-field {
-  border-radius: 10px !important;
-}
+/**********************
+        CONTENT
+***********************/
 
-.search-icon {
-  color: #aaa;
-  position: absolute;
-  top: 10px;
-  left: 195px;
+.content {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #f7f7f7;
 }
 
 /**********************
         MODAL
 ***********************/
 
-.modal-explore-title {
+.modal-title {
   font-size: 30px;
-  background-color: #000;
-  border-radius: 0.2em;
-  padding: 0.4em;
-  color: white;
+  color: black;
   font-weight: bold;
   font-family: 'Helvetica', 'Arial', sans-serif;
 }
@@ -98,23 +96,14 @@ body {
 /**********************
       FOOTER
 ***********************/
-.footer a {
+.footer a, .footer a:hover {
   text-decoration: none !important;
   font-family: 'Rajdhani', sans-serif;
-  color: black !important;
   font-weight: bold;
-  padding-bottom: 40px;
+  color: #606060;
 }
 
-.footer-container {
-  padding-top: 1em;
+.footer {
+  color: #606060;
+  padding-top: 0.5em;
 }
-
-.content {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: #f7f7f7;
-  border-top: 2px #ededed solid;
-  border-bottom: 2px  #ededed solid;
-}
-

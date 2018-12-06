@@ -12,7 +12,7 @@
 	<div class="container">
 		<div class="list-group">
 			<div class="list-header">
-				<span class="list-title">PROJECTS LIST</span>
+				<span class="list-title">PROJECTS</span>
 			</div>
 			{% for project in selected_projects %}
 			<a href="{% url 'website:project' project.owner project.name %}" class="list-group-item">
@@ -20,7 +20,7 @@
 					<div class="col-md-6">
 						<span class="list-group-item-title">{{ project.name | capfirst }}</span><br>
 						<span class="list-group-item-subtitle">Owned by {{ project.owner | capfirst }}</span> <br>
-						<span class="list-group-item-subtitle">License: {{ project.license }}</span>
+						<span class="list-group-item-subtitle">License: {{ project.software_license }}</span>
 					</div>
 				</div>
 			</a>
