@@ -1,7 +1,19 @@
+@font-face {
+  font-family: 'Rajdhani';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/Rajdhani/rajdhani.eot'); /* IE9 Compat Modes */
+  src: local('Rajdhani Regular'), local('Rajdhani-Regular'),
+       url('../fonts/Rajdhani/rajdhani.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/Rajdhani/rajdhani.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/Rajdhani/rajdhani.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/Rajdhani/rajdhani.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/Rajdhani/rajdhani.svg#Rajdhani') format('svg'); /* Legacy iOS */
+}
 
 body {
     font-family: 'Helvetica', 'Arial', sans-serif;
-    background-color: #fff !important;
+    background-color: #f7f7f7 !important;
   }
   
 /**********************
@@ -28,6 +40,7 @@ body {
 .nav-link {
   font-family: 'Rajdhani', sans-serif;
   text-decoration: none;
+  margin-right: 0.2em;
   font-size: 1.55em;
   color: black !important;
 }

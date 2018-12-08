@@ -2,24 +2,57 @@
 {% extends 'website/base.html' %}
 {% load staticfiles %}
 <!-- Title -->
-{% block title %} Index {% endblock %}
+{% block title %} Open Universe - Promoting open source communities {% endblock %}
 <!-- CSS -->
 {% block css  %}
-	<link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
+<link href="{% static 'css/index.css' %}" rel="stylesheet" type="text/css">
 {% endblock  %}
 
 {% block body %}
-	<div class="container text-justify">
 		<div class="jumbotron jumbotron-fluid">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-6">
-							<h1 class="jumbotron-title"><b>Made for newcomers</b></h1>
-							<p class="lead">Open Universe is an analysis platform designed to help new contributors find open source projects. Give yourself the opportunity to join this universe!</p>
+					<div class="col-lg-6">
+						<div class="introduction">
+							<h1>
+								<b>Created for newcomers</b>
+							</h1>
+							<h2>Designed for communities</h2>
+							<p class="lead">Open Universe is an analysis platform designed to help new contributors find open source projects. Give yourself the opportunity to join this universe!</p>			
+						</div>
 					</div>
+					<div class="col-lg-6">
+						<form class="form">
+							<h3>Find a new project</h3>
+							<hr>
+							<div class="form-group">
+								<select class="select selectpicker" data-width="100%" title="Language">
+									{% for language in languages %}
+									<option>{{ language }}</option>
+									{% endfor %}
+								</select>
+							</div>
+							<div class="form-group">
+									<select class="select selectpicker" data-width="100%" title="Domain">
+										{% for domain in domains %}
+										<option>{{ domain }}</option>
+										{% endfor %}
+									</select>
+							</div>
+							<div class="form-group">
+									<select class="select selectpicker" data-width="100%" title="License">
+										{% for license in licenses %}
+										<option>{{ license }}</option>
+										{% endfor %}
+									</select>
+							</div>	
+							<button type="submit" class="btn find-btn">I'm ready</button>
+						</form>
+					</div>				
 				</div>
 			</div>
 		</div>
+		<div class="container text-justify">
 		<div class="row">
 			<div class="col-md-6">
 				<span class="section-title">Abstract</span>
@@ -34,98 +67,4 @@
 			</div>
 		</div>
 	</div>
-{% endblock %}
-
-
-
-{% block javascript %}
-<!-- Number of projects by domain -->
-<script type="text/javascript">
-	google.charts.load("current", { packages: ["corechart", "bar"]});
-	google.charts.setOnLoadCallback(domainColumnChart);
-
-	function domainColumnChart() {
-		var data = new google.visualization.DataTable();
-		data.addColumn('string','Domain');
-		data.addColumn('number','Ocurrences');
-		data.addColumn({type: 'string', role: 'style'});
-		data.addRows([{% for domain, value in projects_per_domain.items %}["{{ domain }}", {{ value }}, 'color: #0057e7'], {% endfor %}]);
-
-	  var options = {
-		fontName: 'Helvetica',
-		legend: { position: "none" },
-		backgroundColor: 'transparent',
-	    vAxis: {
-	      title: "Ocurrences"
-	    },
-	    hAxis: {title: "Application Domain"}
-	   };
-
-	  var chart = new google.visualization.ColumnChart(
-	    document.getElementById("projects_per_domain")
-	  );
-
-	  chart.draw(data, options);
-	}
-</script>
-
-<!-- Number of projects by license -->
-<script type="text/javascript">
-	google.charts.load("current", { packages: ["corechart", "bar"]});
-	google.charts.setOnLoadCallback(licenseColumnChart);
-
-	function licenseColumnChart() {
-		var data = new google.visualization.DataTable();
-		data.addColumn('string','License');
-		data.addColumn('number','Ocurrences');
-		data.addColumn({type: 'string', role: 'style'});
-		data.addRows([{% for license, value in projects_per_license.items %}["{{ license }}", {{ value }}, 'color: #008744'], {% endfor %}]);
-
-	  var options = {
-		fontName: 'Helvetica',
-		legend: { position: "none" },
-		backgroundColor: 'transparent',
-	    vAxis: {
-	      title: "Ocurrences"
-	    },
-	    hAxis: {title: "Software License"}
-	   };
-
-	  var chart = new google.visualization.ColumnChart(
-	    document.getElementById("projects_per_license")
-	  );
-
-	  chart.draw(data, options);
-	}
-</script>
-
-<!-- Number of projects by age -->
-<script type="text/javascript">
-	google.charts.load("current", { packages: ["corechart", "bar"]});
-	google.charts.setOnLoadCallback(ageColumnChart);
-
-	function ageColumnChart() {
-		var data = new google.visualization.DataTable();
-		data.addColumn('string','Age');
-		data.addColumn('number','Ocurrence');
-		data.addColumn({type: 'string', role: 'style'});
-		data.addRows([{% for age, value in projects_per_age.items %}["{{ age }}", {{ value }}, 'color: #d62d20'], {% endfor %}]);
-
-	  var options = {
-		fontName: 'Helvetica',
-		legend: { position: "none" },
-		backgroundColor: 'transparent',
-	    vAxis: {
-	      title: "Ocurrences"
-	    },
-	    hAxis: {title: "Age (Years)"}
-	   };
-
-	  var chart = new google.visualization.ColumnChart(
-	    document.getElementById("projects_per_age")
-	  );
-
-	  chart.draw(data, options);
-	}
-</script>
 {% endblock %}

@@ -1,0 +1,66 @@
+<!-- Template -->
+{% extends 'website/base.html' %}
+{% load staticfiles %}
+{% load pagination %}
+<!-- Title -->
+{% block title %} Open Universe - Search {% endblock %}
+<!-- CSS -->
+{% block css %}
+<link href="{% static 'css/search.css' %}" rel="stylesheet" type="text/css">
+{% endblock  %}
+
+{% block body %}
+	<div class="container">
+		<div class="list-group">
+			<div class="list-header">
+				<span class="list-title">PROJECTS</span>
+			</div>
+			{% for project in projects_list %}
+				<a href="{% url 'website:project' project.owner project.name %}" class="list-group-item">
+					<div class="row">
+						<div class="col-md-6">
+							<span class="list-group-item-title">{{ project.name | capfirst }}</span><br>
+							<span class="list-group-item-subtitle">Owned by {{ project.owner | capfirst }}</span> <br>
+							<span class="list-group-item-subtitle">License: {{ project.software_license }}</span>
+						</div>
+					</div>
+				</a>
+			{% endfor %}
+
+			<nav>
+				<ul class="pagination">
+					{% if projects_list.has_previous %}
+					<li class="page-item">
+						<a class="page-link" href="?{% replace_parameter request 'page' projects_list.previous_page_number %}"">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="?{% replace_parameter request 'page' projects_list.previous_page_number %}"">
+							<span>{{ projects_list.previous_page_number }}</span>
+						</a>
+					</li>
+					{% endif %}
+					
+					<li class="page-item active">
+						<a class="page-link" href="#">{{ projects_list.number }}</a>
+					</li>
+					
+					{% if projects_list.has_next %}
+					<li class="page-item">
+						<a class="page-link" href="?{% replace_parameter request 'page' projects_list.next_page_number %}">
+							<span>{{ projects_list.next_page_number }}</span>
+						</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="?{% replace_parameter request 'page' projects_list.next_page_number %}">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+					{% endif %}
+				</ul>
+			</nav>
+		</div>
+	</div>
+{% endblock %}
+

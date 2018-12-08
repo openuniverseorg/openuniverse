@@ -83,9 +83,6 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages'
             ],
-            'libraries': {
-                'to_datetime':'openuniverse.templatetags.to_datetime',
-                'duration':'openuniverse.templatetags.duration'},
         },
     },
 ]

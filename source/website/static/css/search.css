@@ -1,0 +1,46 @@
+.list-header {
+    background-color: black;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+    padding: 1.5em;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.list-title {
+    font-size: 2em;
+    color: white;
+    text-align: center;
+}
+
+.list-group-item:hover {
+     background-color: #    ;
+     color: #565656;
+}
+
+.list-group-item {
+    text-decoration: none;
+    color: black;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+.list-group-item-title {
+    font-size: 1.5em;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+.list-group-item-subtitle {
+    font-weight: lighter;
+    font-size: 1.3em;
+    font-family: 'Rajdhani', sans-serif;  
+}
+
+.page-link {
+    color: black !important;
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+}
+
+.active a {
+    background-color: #efefef !important;
+    border-color: black !important;
+}
