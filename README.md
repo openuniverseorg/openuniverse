@@ -12,7 +12,7 @@ We are still under development. In a few weeks we will turn available the submis
 ## Contribute
 If you are interested in contributing somehow with the open universe project, you can start by reading the development instructions in our wiki section [[↗]](https://github.com/openuniverseorg/openuniverse/wiki). If you have any questions, feel free to message us on Discord [[↗]](https://discordapp.com/invite/wvwRDDj). 
 
-## Contributors
+## Mentors
 * **Felipe Fronchetti** - *Creator and Core Contributor* - [@fronchetti](https://github.com/fronchetti)
 * **Marcelo Freitas** - *Core Contributor* - [@marcelofa](https://github.com/marcelofa)
 
